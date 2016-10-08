@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ps_product_comment_img[ps_product_comment_img]SQLMapper自动映射 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:25 -->
+<mapper namespace="com.hipishare.products.dao.mapper.Ps_product_comment_imgMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_product_comment_imgPO">
+		INSERT INTO ps_product_comment_img (
+		<if test="comment_id != null">
+	         comment_id, <!-- 评价id -->
+		</if>
+		<if test="img_code != null and img_code != ''">
+	         img_code, <!-- 评价图片code -->
+		</if>
+		<if test="upload_time != null and upload_time != ''">
+	         upload_time, <!-- 上传时间 -->
+		</if>
+		<if test="sort != null">
+	         sort, <!-- 图片排序 -->
+		</if>
+	          id
+		)VALUES(
+		<if test="comment_id != null">
+	          #{comment_id, jdbcType=INTEGER}, <!-- 评价id -->
+	    </if>
+		<if test="img_code != null and img_code != ''">
+	          #{img_code, jdbcType=VARCHAR}, <!-- 评价图片code -->
+	    </if>
+		<if test="upload_time != null and upload_time != ''">
+	          #{upload_time, jdbcType=VARCHAR}, <!-- 上传时间 -->
+	    </if>
+		<if test="sort != null">
+	          #{sort, jdbcType=INTEGER}, <!-- 图片排序 -->
+	    </if>
+	          null
+		)
+	</insert>
+	
+	<!-- 插入一个数据持久化对象(含所有字段) -->
+	<insert id="insertAll" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_product_comment_imgPO">
+		INSERT INTO ps_product_comment_img (
+		    <include refid="column" />
+		)
+		VALUES (
+		    #{id, jdbcType=INTEGER},  <!-- id -->
+		    #{comment_id, jdbcType=INTEGER},  <!-- 评价id -->
+		    #{img_code, jdbcType=VARCHAR},  <!-- 评价图片code -->
+		    #{upload_time, jdbcType=VARCHAR},  <!-- 上传时间 -->
+		    #{sort, jdbcType=INTEGER}  <!-- 图片排序 -->
+		)
+	</insert>
+
+	<!-- 根据主键修改数据持久化对象 -->
+	<update id="updateByKey" parameterType="Ps_product_comment_imgPO">
+		UPDATE ps_product_comment_img
+		<set>
+			<if test="id != null">
+		          id = #{id, jdbcType=INTEGER},  <!-- id -->
+			</if>
+			<if test="comment_id != null">
+		          comment_id = #{comment_id, jdbcType=INTEGER},  <!-- 评价id -->
+			</if>
+			<if test="img_code != null">
+		          img_code = #{img_code, jdbcType=VARCHAR},  <!-- 评价图片code -->
+			</if>
+			<if test="upload_time != null">
+		          upload_time = #{upload_time, jdbcType=VARCHAR},  <!-- 上传时间 -->
+			</if>
+			<if test="sort != null">
+		          sort = #{sort, jdbcType=INTEGER},  <!-- 图片排序 -->
+			</if>
+		</set>
+		WHERE  id = #{id}
+	</update>
+	
+	<!-- 根据主键删除数据持久化对象 -->
+	<delete id="deleteByKey">
+		DELETE FROM ps_product_comment_img WHERE  id = #{id}
+	</delete>
+
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByKey" resultType="Ps_product_comment_imgPO">
+		SELECT
+		<include refid="column" />
+		FROM ps_product_comment_img WHERE  id = #{id}
+	</select>
+	
+	<!-- 表字段 -->
+	<sql id="column">
+		  id,  <!-- id -->
+		  comment_id,  <!-- 评价id -->
+		  img_code,  <!-- 评价图片code -->
+		  upload_time,  <!-- 上传时间 -->
+		  sort  <!-- 图片排序 -->
+	</sql>
+	
+	<!-- 表字段(用于外表的关联时引用) -->
+	<sql id="column2">
+		  ps_product_comment_img.id,  <!-- id -->
+		  ps_product_comment_img.comment_id,  <!-- 评价id -->
+		  ps_product_comment_img.img_code,  <!-- 评价图片code -->
+		  ps_product_comment_img.upload_time,  <!-- 上传时间 -->
+		  ps_product_comment_img.sort  <!-- 图片排序 -->
+	</sql>
+
+	<!-- Where精确匹配字段 -->
+	<sql id="equal">
+	   <if test="id != null ">
+		      AND id = #{id}  <!-- id -->
+		</if>
+	   <if test="comment_id != null ">
+		      AND comment_id = #{comment_id}  <!-- 评价id -->
+		</if>
+	    <if test="img_code != null and img_code != ''">
+		      AND img_code = #{img_code}  <!-- 评价图片code -->
+		</if>
+	    <if test="upload_time != null and upload_time != ''">
+		      AND upload_time = #{upload_time}  <!-- 上传时间 -->
+		</if>
+	   <if test="sort != null ">
+		      AND sort = #{sort}  <!-- 图片排序 -->
+		</if>
+	</sql>
+	
+	<!-- Where模糊匹配字段 -->
+	<sql id="like">
+	    <if test="img_code != null and img_code != ''">
+		      AND img_code like '%${img_code}%'  <!-- 评价图片code -->
+		</if>
+	    <if test="upload_time != null and upload_time != ''">
+		      AND upload_time like '%${upload_time}%'  <!-- 上传时间 -->
+		</if>
+	</sql>
+	
+</mapper>

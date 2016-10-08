@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ps_purchasing_list_detail[ps_purchasing_list_detail]SQLMapper自动映射 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:26 -->
+<mapper namespace="com.hipishare.products.dao.mapper.Ps_purchasing_list_detailMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_purchasing_list_detailPO">
+		INSERT INTO ps_purchasing_list_detail (
+		<if test="purchasing_no != null and purchasing_no != ''">
+	         purchasing_no, <!-- purchasing_no -->
+		</if>
+		<if test="shopping_list_no != null and shopping_list_no != ''">
+	         shopping_list_no, <!-- 清单编号 -->
+		</if>
+		<if test="product_no != null and product_no != ''">
+	         product_no, <!-- 商品编号 -->
+		</if>
+		<if test="num != null">
+	         num, <!-- 商品数量 -->
+		</if>
+		<if test="price != null">
+	         price, <!-- 商品下单价格 -->
+		</if>
+		<if test="status != null">
+	         status, <!-- status -->
+		</if>
+	          id
+		)VALUES(
+		<if test="purchasing_no != null and purchasing_no != ''">
+	          #{purchasing_no, jdbcType=VARCHAR}, <!-- purchasing_no -->
+	    </if>
+		<if test="shopping_list_no != null and shopping_list_no != ''">
+	          #{shopping_list_no, jdbcType=VARCHAR}, <!-- 清单编号 -->
+	    </if>
+		<if test="product_no != null and product_no != ''">
+	          #{product_no, jdbcType=VARCHAR}, <!-- 商品编号 -->
+	    </if>
+		<if test="num != null">
+	          #{num, jdbcType=INTEGER}, <!-- 商品数量 -->
+	    </if>
+		<if test="price != null">
+	          #{price, jdbcType=NUMERIC}, <!-- 商品下单价格 -->
+	    </if>
+		<if test="status != null">
+	          #{status, jdbcType=INTEGER}, <!-- status -->
+	    </if>
+	          null
+		)
+	</insert>
+	
+	<!-- 插入一个数据持久化对象(含所有字段) -->
+	<insert id="insertAll" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_purchasing_list_detailPO">
+		INSERT INTO ps_purchasing_list_detail (
+		    <include refid="column" />
+		)
+		VALUES (
+		    #{id, jdbcType=INTEGER},  <!-- id -->
+		    #{purchasing_no, jdbcType=VARCHAR},  <!-- purchasing_no -->
+		    #{shopping_list_no, jdbcType=VARCHAR},  <!-- 清单编号 -->
+		    #{product_no, jdbcType=VARCHAR},  <!-- 商品编号 -->
+		    #{num, jdbcType=INTEGER},  <!-- 商品数量 -->
+		    #{price, jdbcType=NUMERIC},  <!-- 商品下单价格 -->
+		    #{status, jdbcType=INTEGER}  <!-- status -->
+		)
+	</insert>
+
+	<!-- 根据主键修改数据持久化对象 -->
+	<update id="updateByKey" parameterType="Ps_purchasing_list_detailPO">
+		UPDATE ps_purchasing_list_detail
+		<set>
+			<if test="id != null">
+		          id = #{id, jdbcType=INTEGER},  <!-- id -->
+			</if>
+			<if test="purchasing_no != null">
+		          purchasing_no = #{purchasing_no, jdbcType=VARCHAR},  <!-- purchasing_no -->
+			</if>
+			<if test="shopping_list_no != null">
+		          shopping_list_no = #{shopping_list_no, jdbcType=VARCHAR},  <!-- 清单编号 -->
+			</if>
+			<if test="product_no != null">
+		          product_no = #{product_no, jdbcType=VARCHAR},  <!-- 商品编号 -->
+			</if>
+			<if test="num != null">
+		          num = #{num, jdbcType=INTEGER},  <!-- 商品数量 -->
+			</if>
+			<if test="price != null">
+		          price = #{price, jdbcType=NUMERIC},  <!-- 商品下单价格 -->
+			</if>
+			<if test="status != null">
+		          status = #{status, jdbcType=INTEGER},  <!-- status -->
+			</if>
+		</set>
+		WHERE  id = #{id}
+	</update>
+	
+	<!-- 根据主键删除数据持久化对象 -->
+	<delete id="deleteByKey">
+		DELETE FROM ps_purchasing_list_detail WHERE  id = #{id}
+	</delete>
+
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByKey" resultType="Ps_purchasing_list_detailPO">
+		SELECT
+		<include refid="column" />
+		FROM ps_purchasing_list_detail WHERE  id = #{id}
+	</select>
+
+	<!-- 表字段 -->
+	<sql id="column">
+		  id,  <!-- id -->
+		  purchasing_no,  <!-- purchasing_no -->
+		  shopping_list_no,  <!-- 清单编号 -->
+		  product_no,  <!-- 商品编号 -->
+		  num,  <!-- 商品数量 -->
+		  price,  <!-- 商品下单价格 -->
+		  status  <!-- status -->
+	</sql>
+	
+	<!-- 表字段(用于外表的关联时引用) -->
+	<sql id="column2">
+		  ps_purchasing_list_detail.id,  <!-- id -->
+		  ps_purchasing_list_detail.purchasing_no,  <!-- purchasing_no -->
+		  ps_purchasing_list_detail.shopping_list_no,  <!-- 清单编号 -->
+		  ps_purchasing_list_detail.product_no,  <!-- 商品编号 -->
+		  ps_purchasing_list_detail.num,  <!-- 商品数量 -->
+		  ps_purchasing_list_detail.price,  <!-- 商品下单价格 -->
+		  ps_purchasing_list_detail.status  <!-- status -->
+	</sql>
+
+	<!-- Where精确匹配字段 -->
+	<sql id="equal">
+	   <if test="id != null ">
+		      AND id = #{id}  <!-- id -->
+		</if>
+	    <if test="purchasing_no != null and purchasing_no != ''">
+		      AND purchasing_no = #{purchasing_no}  <!-- purchasing_no -->
+		</if>
+	    <if test="shopping_list_no != null and shopping_list_no != ''">
+		      AND shopping_list_no = #{shopping_list_no}  <!-- 清单编号 -->
+		</if>
+	    <if test="product_no != null and product_no != ''">
+		      AND product_no = #{product_no}  <!-- 商品编号 -->
+		</if>
+	   <if test="num != null ">
+		      AND num = #{num}  <!-- 商品数量 -->
+		</if>
+	   <if test="price != null ">
+		      AND price = #{price}  <!-- 商品下单价格 -->
+		</if>
+	   <if test="status != null ">
+		      AND status = #{status}  <!-- status -->
+		</if>
+	</sql>
+	
+	<!-- Where模糊匹配字段 -->
+	<sql id="like">
+	    <if test="purchasing_no != null and purchasing_no != ''">
+		      AND purchasing_no like '%${purchasing_no}%'  <!-- purchasing_no -->
+		</if>
+	    <if test="shopping_list_no != null and shopping_list_no != ''">
+		      AND shopping_list_no like '%${shopping_list_no}%'  <!-- 清单编号 -->
+		</if>
+	    <if test="product_no != null and product_no != ''">
+		      AND product_no like '%${product_no}%'  <!-- 商品编号 -->
+		</if>
+	</sql>
+	
+</mapper>

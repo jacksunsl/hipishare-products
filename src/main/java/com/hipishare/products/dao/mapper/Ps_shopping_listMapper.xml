@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ps_shopping_list[ps_shopping_list]SQLMapper自动映射 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:26 -->
+<mapper namespace="com.hipishare.products.dao.mapper.Ps_shopping_listMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_shopping_listPO">
+		INSERT INTO ps_shopping_list (
+		<if test="list_no != null and list_no != ''">
+	         list_no, <!-- 清单编号 -->
+		</if>
+		<if test="list_name != null and list_name != ''">
+	         list_name, <!-- 清单名称 -->
+		</if>
+		<if test="total_price != null">
+	         total_price, <!-- 清单总价格 -->
+		</if>
+		<if test="piece_num != null">
+	         piece_num, <!-- 清单商品总件数 -->
+		</if>
+		<if test="create_time != null and create_time != ''">
+	         create_time, <!-- 清单创建时间，即出单时间 -->
+		</if>
+		<if test="status != null">
+	         status, <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+		</if>
+		<if test="userid != null">
+	         userid, <!-- 清单创建用户 -->
+		</if>
+		<if test="remark != null and remark != ''">
+	         remark, <!-- 清单备注 -->
+		</if>
+	          id
+		)VALUES(
+		<if test="list_no != null and list_no != ''">
+	          #{list_no, jdbcType=VARCHAR}, <!-- 清单编号 -->
+	    </if>
+		<if test="list_name != null and list_name != ''">
+	          #{list_name, jdbcType=VARCHAR}, <!-- 清单名称 -->
+	    </if>
+		<if test="total_price != null">
+	          #{total_price, jdbcType=NUMERIC}, <!-- 清单总价格 -->
+	    </if>
+		<if test="piece_num != null">
+	          #{piece_num, jdbcType=INTEGER}, <!-- 清单商品总件数 -->
+	    </if>
+		<if test="create_time != null and create_time != ''">
+	          #{create_time, jdbcType=VARCHAR}, <!-- 清单创建时间，即出单时间 -->
+	    </if>
+		<if test="status != null">
+	          #{status, jdbcType=INTEGER}, <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+	    </if>
+		<if test="userid != null">
+	          #{userid, jdbcType=INTEGER}, <!-- 清单创建用户 -->
+	    </if>
+		<if test="remark != null and remark != ''">
+	          #{remark, jdbcType=VARCHAR}, <!-- 清单备注 -->
+	    </if>
+	          null
+		)
+	</insert>
+	
+	<!-- 插入一个数据持久化对象(含所有字段) -->
+	<insert id="insertAll" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_shopping_listPO">
+		INSERT INTO ps_shopping_list (
+		    <include refid="column" />
+		)
+		VALUES (
+		    #{id, jdbcType=INTEGER},  <!-- id -->
+		    #{list_no, jdbcType=VARCHAR},  <!-- 清单编号 -->
+		    #{list_name, jdbcType=VARCHAR},  <!-- 清单名称 -->
+		    #{total_price, jdbcType=NUMERIC},  <!-- 清单总价格 -->
+		    #{piece_num, jdbcType=INTEGER},  <!-- 清单商品总件数 -->
+		    #{create_time, jdbcType=VARCHAR},  <!-- 清单创建时间，即出单时间 -->
+		    #{status, jdbcType=INTEGER},  <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+		    #{userid, jdbcType=INTEGER},  <!-- 清单创建用户 -->
+		    #{remark, jdbcType=VARCHAR}  <!-- 清单备注 -->
+		)
+	</insert>
+
+	<!-- 根据主键修改数据持久化对象 -->
+	<update id="updateByKey" parameterType="Ps_shopping_listPO">
+		UPDATE ps_shopping_list
+		<set>
+			<if test="id != null">
+		          id = #{id, jdbcType=INTEGER},  <!-- id -->
+			</if>
+			<if test="list_no != null">
+		          list_no = #{list_no, jdbcType=VARCHAR},  <!-- 清单编号 -->
+			</if>
+			<if test="list_name != null">
+		          list_name = #{list_name, jdbcType=VARCHAR},  <!-- 清单名称 -->
+			</if>
+			<if test="total_price != null">
+		          total_price = #{total_price, jdbcType=NUMERIC},  <!-- 清单总价格 -->
+			</if>
+			<if test="piece_num != null">
+		          piece_num = #{piece_num, jdbcType=INTEGER},  <!-- 清单商品总件数 -->
+			</if>
+			<if test="create_time != null">
+		          create_time = #{create_time, jdbcType=VARCHAR},  <!-- 清单创建时间，即出单时间 -->
+			</if>
+			<if test="status != null">
+		          status = #{status, jdbcType=INTEGER},  <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+			</if>
+			<if test="userid != null">
+		          userid = #{userid, jdbcType=INTEGER},  <!-- 清单创建用户 -->
+			</if>
+			<if test="remark != null">
+		          remark = #{remark, jdbcType=VARCHAR},  <!-- 清单备注 -->
+			</if>
+		</set>
+		WHERE  id = #{id}
+	</update>
+	
+	<!-- 根据主键删除数据持久化对象 -->
+	<delete id="deleteByKey">
+		DELETE FROM ps_shopping_list WHERE  id = #{id}
+	</delete>
+
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByKey" resultType="Ps_shopping_listPO">
+		SELECT
+		<include refid="column" />
+		FROM ps_shopping_list WHERE  id = #{id}
+	</select>
+	
+	<!-- 表字段 -->
+	<sql id="column">
+		  id,  <!-- id -->
+		  list_no,  <!-- 清单编号 -->
+		  list_name,  <!-- 清单名称 -->
+		  total_price,  <!-- 清单总价格 -->
+		  piece_num,  <!-- 清单商品总件数 -->
+		  create_time,  <!-- 清单创建时间，即出单时间 -->
+		  status,  <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+		  userid,  <!-- 清单创建用户 -->
+		  remark  <!-- 清单备注 -->
+	</sql>
+	
+	<!-- 表字段(用于外表的关联时引用) -->
+	<sql id="column2">
+		  ps_shopping_list.id,  <!-- id -->
+		  ps_shopping_list.list_no,  <!-- 清单编号 -->
+		  ps_shopping_list.list_name,  <!-- 清单名称 -->
+		  ps_shopping_list.total_price,  <!-- 清单总价格 -->
+		  ps_shopping_list.piece_num,  <!-- 清单商品总件数 -->
+		  ps_shopping_list.create_time,  <!-- 清单创建时间，即出单时间 -->
+		  ps_shopping_list.status,  <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+		  ps_shopping_list.userid,  <!-- 清单创建用户 -->
+		  ps_shopping_list.remark  <!-- 清单备注 -->
+	</sql>
+
+	<!-- Where精确匹配字段 -->
+	<sql id="equal">
+	   <if test="id != null ">
+		      AND id = #{id}  <!-- id -->
+		</if>
+	    <if test="list_no != null and list_no != ''">
+		      AND list_no = #{list_no}  <!-- 清单编号 -->
+		</if>
+	    <if test="list_name != null and list_name != ''">
+		      AND list_name = #{list_name}  <!-- 清单名称 -->
+		</if>
+	   <if test="total_price != null ">
+		      AND total_price = #{total_price}  <!-- 清单总价格 -->
+		</if>
+	   <if test="piece_num != null ">
+		      AND piece_num = #{piece_num}  <!-- 清单商品总件数 -->
+		</if>
+	    <if test="create_time != null and create_time != ''">
+		      AND create_time = #{create_time}  <!-- 清单创建时间，即出单时间 -->
+		</if>
+	   <if test="status != null ">
+		      AND status = #{status}  <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+		</if>
+	   <if test="userid != null ">
+		      AND userid = #{userid}  <!-- 清单创建用户 -->
+		</if>
+	    <if test="remark != null and remark != ''">
+		      AND remark = #{remark}  <!-- 清单备注 -->
+		</if>
+	</sql>
+	
+	<!-- Where模糊匹配字段 -->
+	<sql id="like">
+	    <if test="list_no != null and list_no != ''">
+		      AND list_no like '%${list_no}%'  <!-- 清单编号 -->
+		</if>
+	    <if test="list_name != null and list_name != ''">
+		      AND list_name like '%${list_name}%'  <!-- 清单名称 -->
+		</if>
+	    <if test="create_time != null and create_time != ''">
+		      AND create_time like '%${create_time}%'  <!-- 清单创建时间，即出单时间 -->
+		</if>
+	    <if test="remark != null and remark != ''">
+		      AND remark like '%${remark}%'  <!-- 清单备注 -->
+		</if>
+	</sql>
+	
+</mapper>

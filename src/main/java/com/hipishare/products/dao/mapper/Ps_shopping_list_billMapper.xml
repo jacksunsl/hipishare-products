@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ps_shopping_list_bill[ps_shopping_list_bill]SQLMapper自动映射 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:26 -->
+<mapper namespace="com.hipishare.products.dao.mapper.Ps_shopping_list_billMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert"  parameterType="Ps_shopping_list_billPO">
+		INSERT INTO ps_shopping_list_bill (
+		<if test="list_no != null and list_no != ''">
+	         list_no, <!-- 清单编号 -->
+		</if>
+		<if test="img_code != null and img_code != ''">
+	         img_code, <!-- 图片标识 -->
+		</if>
+		<if test="img_remark != null and img_remark != ''">
+	         img_remark, <!-- 图片备注 -->
+		</if>
+		<if test="upload_time != null and upload_time != ''">
+	         upload_time, <!-- 上传时间 -->
+		</if>
+		<if test="userid != null">
+	         userid, <!-- 上传用户 -->
+		</if>
+		<if test="id != null">
+	          id  <!-- id -->
+	   </if>
+		)VALUES(
+		<if test="list_no != null and list_no != ''">
+	          #{list_no, jdbcType=VARCHAR}, <!-- 清单编号 -->
+	    </if>
+		<if test="img_code != null and img_code != ''">
+	          #{img_code, jdbcType=VARCHAR}, <!-- 图片标识 -->
+	    </if>
+		<if test="img_remark != null and img_remark != ''">
+	          #{img_remark, jdbcType=VARCHAR}, <!-- 图片备注 -->
+	    </if>
+		<if test="upload_time != null and upload_time != ''">
+	          #{upload_time, jdbcType=VARCHAR}, <!-- 上传时间 -->
+	    </if>
+		<if test="userid != null">
+	          #{userid, jdbcType=INTEGER}, <!-- 上传用户 -->
+	    </if>
+		<if test="id != null">
+		     #{id, jdbcType=INTEGER}  <!-- id -->
+	    </if>
+		)
+	</insert>
+	
+	<!-- 插入一个数据持久化对象(含所有字段) -->
+	<insert id="insertAll"  parameterType="Ps_shopping_list_billPO">
+		INSERT INTO ps_shopping_list_bill (
+		    <include refid="column" />
+		)
+		VALUES (
+		    #{id, jdbcType=INTEGER},  <!-- id -->
+		    #{list_no, jdbcType=VARCHAR},  <!-- 清单编号 -->
+		    #{img_code, jdbcType=VARCHAR},  <!-- 图片标识 -->
+		    #{img_remark, jdbcType=VARCHAR},  <!-- 图片备注 -->
+		    #{upload_time, jdbcType=VARCHAR},  <!-- 上传时间 -->
+		    #{userid, jdbcType=INTEGER}  <!-- 上传用户 -->
+		)
+	</insert>
+
+	<!-- 根据主键修改数据持久化对象 -->
+	<update id="updateByKey" parameterType="Ps_shopping_list_billPO">
+		UPDATE ps_shopping_list_bill
+		<set>
+			<if test="id != null">
+		          id = #{id, jdbcType=INTEGER},  <!-- id -->
+			</if>
+			<if test="list_no != null">
+		          list_no = #{list_no, jdbcType=VARCHAR},  <!-- 清单编号 -->
+			</if>
+			<if test="img_code != null">
+		          img_code = #{img_code, jdbcType=VARCHAR},  <!-- 图片标识 -->
+			</if>
+			<if test="img_remark != null">
+		          img_remark = #{img_remark, jdbcType=VARCHAR},  <!-- 图片备注 -->
+			</if>
+			<if test="upload_time != null">
+		          upload_time = #{upload_time, jdbcType=VARCHAR},  <!-- 上传时间 -->
+			</if>
+			<if test="userid != null">
+		          userid = #{userid, jdbcType=INTEGER},  <!-- 上传用户 -->
+			</if>
+		</set>
+		WHERE  id = #{id}
+	</update>
+	
+	<!-- 根据主键删除数据持久化对象 -->
+	<delete id="deleteByKey">
+		DELETE FROM ps_shopping_list_bill WHERE  id = #{id}
+	</delete>
+
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByKey" resultType="Ps_shopping_list_billPO">
+		SELECT
+		<include refid="column" />
+		FROM ps_shopping_list_bill WHERE  id = #{id}
+	</select>
+	
+	<!-- 表字段 -->
+	<sql id="column">
+		  id,  <!-- id -->
+		  list_no,  <!-- 清单编号 -->
+		  img_code,  <!-- 图片标识 -->
+		  img_remark,  <!-- 图片备注 -->
+		  upload_time,  <!-- 上传时间 -->
+		  userid  <!-- 上传用户 -->
+	</sql>
+	
+	<!-- 表字段(用于外表的关联时引用) -->
+	<sql id="column2">
+		  ps_shopping_list_bill.id,  <!-- id -->
+		  ps_shopping_list_bill.list_no,  <!-- 清单编号 -->
+		  ps_shopping_list_bill.img_code,  <!-- 图片标识 -->
+		  ps_shopping_list_bill.img_remark,  <!-- 图片备注 -->
+		  ps_shopping_list_bill.upload_time,  <!-- 上传时间 -->
+		  ps_shopping_list_bill.userid  <!-- 上传用户 -->
+	</sql>
+
+	<!-- Where精确匹配字段 -->
+	<sql id="equal">
+	   <if test="id != null ">
+		      AND id = #{id}  <!-- id -->
+		</if>
+	    <if test="list_no != null and list_no != ''">
+		      AND list_no = #{list_no}  <!-- 清单编号 -->
+		</if>
+	    <if test="img_code != null and img_code != ''">
+		      AND img_code = #{img_code}  <!-- 图片标识 -->
+		</if>
+	    <if test="img_remark != null and img_remark != ''">
+		      AND img_remark = #{img_remark}  <!-- 图片备注 -->
+		</if>
+	    <if test="upload_time != null and upload_time != ''">
+		      AND upload_time = #{upload_time}  <!-- 上传时间 -->
+		</if>
+	   <if test="userid != null ">
+		      AND userid = #{userid}  <!-- 上传用户 -->
+		</if>
+	</sql>
+	
+	<!-- Where模糊匹配字段 -->
+	<sql id="like">
+	    <if test="list_no != null and list_no != ''">
+		      AND list_no like '%${list_no}%'  <!-- 清单编号 -->
+		</if>
+	    <if test="img_code != null and img_code != ''">
+		      AND img_code like '%${img_code}%'  <!-- 图片标识 -->
+		</if>
+	    <if test="img_remark != null and img_remark != ''">
+		      AND img_remark like '%${img_remark}%'  <!-- 图片备注 -->
+		</if>
+	    <if test="upload_time != null and upload_time != ''">
+		      AND upload_time like '%${upload_time}%'  <!-- 上传时间 -->
+		</if>
+	</sql>
+	
+</mapper>

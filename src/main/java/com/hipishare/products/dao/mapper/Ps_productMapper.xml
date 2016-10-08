@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ps_product[ps_product]SQLMapper自动映射 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:25 -->
+<mapper namespace="com.hipishare.products.dao.mapper.Ps_productMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_productPO">
+		INSERT INTO ps_product (
+		<if test="product_no != null and product_no != ''">
+	         product_no, <!-- 商品编号 -->
+		</if>
+		<if test="product_name != null and product_name != ''">
+	         product_name, <!-- 商品名称 -->
+		</if>
+		<if test="product_brief != null and product_brief != ''">
+	         product_brief, <!-- 商品描述 -->
+		</if>
+		<if test="mark_price != null">
+	         mark_price, <!-- 商品标价，售出商品的实际价格 -->
+		</if>
+		<if test="original_price != null">
+	         original_price, <!-- 商品原价，商品原来的价格 -->
+		</if>
+		<if test="cost_price != null">
+	         cost_price, <!-- 商品成本价 -->
+		</if>
+		<if test="status != null">
+	         status, <!-- 商品状态(1:未审核 2:审核通过 3:上架 4:下架) -->
+		</if>
+		<if test="create_time != null and create_time != ''">
+	         create_time, <!-- 创建时间 -->
+		</if>
+		<if test="update_time != null and update_time != ''">
+	         update_time, <!-- 修改时间 -->
+		</if>
+		<if test="userid != null">
+	         userid, <!-- userid -->
+		</if>
+		<if test="enable != null">
+	         enable, <!-- 是否有效(0:删除 1:有效) -->
+		</if>
+	          id
+		)VALUES(
+		<if test="product_no != null and product_no != ''">
+	          #{product_no, jdbcType=VARCHAR}, <!-- 商品编号 -->
+	    </if>
+		<if test="product_name != null and product_name != ''">
+	          #{product_name, jdbcType=VARCHAR}, <!-- 商品名称 -->
+	    </if>
+		<if test="product_brief != null and product_brief != ''">
+	          #{product_brief, jdbcType=VARCHAR}, <!-- 商品描述 -->
+	    </if>
+		<if test="mark_price != null">
+	          #{mark_price, jdbcType=NUMERIC}, <!-- 商品标价，售出商品的实际价格 -->
+	    </if>
+		<if test="original_price != null">
+	          #{original_price, jdbcType=NUMERIC}, <!-- 商品原价，商品原来的价格 -->
+	    </if>
+		<if test="cost_price != null">
+	          #{cost_price, jdbcType=NUMERIC}, <!-- 商品成本价 -->
+	    </if>
+		<if test="status != null">
+	          #{status, jdbcType=INTEGER}, <!-- 商品状态(1:未审核 2:审核通过 3:上架 4:下架) -->
+	    </if>
+		<if test="create_time != null and create_time != ''">
+	          #{create_time, jdbcType=VARCHAR}, <!-- 创建时间 -->
+	    </if>
+		<if test="update_time != null and update_time != ''">
+	          #{update_time, jdbcType=VARCHAR}, <!-- 修改时间 -->
+	    </if>
+		<if test="userid != null">
+	          #{userid, jdbcType=INTEGER}, <!-- userid -->
+	    </if>
+		<if test="enable != null">
+	          #{enable, jdbcType=INTEGER}, <!-- 是否有效(0:删除 1:有效) -->
+	    </if>
+	          null
+		)
+	</insert>
+	
+	<!-- 插入一个数据持久化对象(含所有字段) -->
+	<insert id="insertAll" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_productPO">
+		INSERT INTO ps_product (
+		    <include refid="column" />
+		)
+		VALUES (
+		    #{id, jdbcType=INTEGER},  <!-- id -->
+		    #{product_no, jdbcType=VARCHAR},  <!-- 商品编号 -->
+		    #{product_name, jdbcType=VARCHAR},  <!-- 商品名称 -->
+		    #{product_brief, jdbcType=VARCHAR},  <!-- 商品描述 -->
+		    #{mark_price, jdbcType=NUMERIC},  <!-- 商品标价，售出商品的实际价格 -->
+		    #{original_price, jdbcType=NUMERIC},  <!-- 商品原价，商品原来的价格 -->
+		    #{cost_price, jdbcType=NUMERIC},  <!-- 商品成本价 -->
+		    #{status, jdbcType=INTEGER},  <!-- 商品状态(1:未审核 2:审核通过 3:上架 4:下架) -->
+		    #{create_time, jdbcType=VARCHAR},  <!-- 创建时间 -->
+		    #{update_time, jdbcType=VARCHAR},  <!-- 修改时间 -->
+		    #{userid, jdbcType=INTEGER},  <!-- userid -->
+		    #{enable, jdbcType=INTEGER}  <!-- 是否有效(0:删除 1:有效) -->
+		)
+	</insert>
+
+	<!-- 根据主键修改数据持久化对象 -->
+	<update id="updateByKey" parameterType="Ps_productPO">
+		UPDATE ps_product
+		<set>
+			<if test="id != null">
+		          id = #{id, jdbcType=INTEGER},  <!-- id -->
+			</if>
+			<if test="product_no != null">
+		          product_no = #{product_no, jdbcType=VARCHAR},  <!-- 商品编号 -->
+			</if>
+			<if test="product_name != null">
+		          product_name = #{product_name, jdbcType=VARCHAR},  <!-- 商品名称 -->
+			</if>
+			<if test="product_brief != null">
+		          product_brief = #{product_brief, jdbcType=VARCHAR},  <!-- 商品描述 -->
+			</if>
+			<if test="mark_price != null">
+		          mark_price = #{mark_price, jdbcType=NUMERIC},  <!-- 商品标价，售出商品的实际价格 -->
+			</if>
+			<if test="original_price != null">
+		          original_price = #{original_price, jdbcType=NUMERIC},  <!-- 商品原价，商品原来的价格 -->
+			</if>
+			<if test="cost_price != null">
+		          cost_price = #{cost_price, jdbcType=NUMERIC},  <!-- 商品成本价 -->
+			</if>
+			<if test="status != null">
+		          status = #{status, jdbcType=INTEGER},  <!-- 商品状态(1:未审核 2:审核通过 3:上架 4:下架) -->
+			</if>
+			<if test="create_time != null">
+		          create_time = #{create_time, jdbcType=VARCHAR},  <!-- 创建时间 -->
+			</if>
+			<if test="update_time != null">
+		          update_time = #{update_time, jdbcType=VARCHAR},  <!-- 修改时间 -->
+			</if>
+			<if test="userid != null">
+		          userid = #{userid, jdbcType=INTEGER},  <!-- userid -->
+			</if>
+			<if test="enable != null">
+		          enable = #{enable, jdbcType=INTEGER},  <!-- 是否有效(0:删除 1:有效) -->
+			</if>
+		</set>
+		WHERE  id = #{id}
+	</update>
+	
+	<!-- 根据主键删除数据持久化对象 -->
+	<delete id="deleteByKey">
+		DELETE FROM ps_product WHERE  id = #{id}
+	</delete>
+
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByKey" resultType="Ps_productPO">
+		SELECT
+		<include refid="column" />
+		FROM ps_product WHERE  id = #{id}
+	</select>
+	<!-- 表字段 -->
+	<sql id="column">
+		  id,  <!-- id -->
+		  product_no,  <!-- 商品编号 -->
+		  product_name,  <!-- 商品名称 -->
+		  product_brief,  <!-- 商品描述 -->
+		  mark_price,  <!-- 商品标价，售出商品的实际价格 -->
+		  original_price,  <!-- 商品原价，商品原来的价格 -->
+		  cost_price,  <!-- 商品成本价 -->
+		  status,  <!-- 商品状态(1:未审核 2:审核通过 3:上架 4:下架) -->
+		  create_time,  <!-- 创建时间 -->
+		  update_time,  <!-- 修改时间 -->
+		  userid,  <!-- userid -->
+		  enable  <!-- 是否有效(0:删除 1:有效) -->
+	</sql>
+	
+	<!-- 表字段(用于外表的关联时引用) -->
+	<sql id="column2">
+		  ps_product.id,  <!-- id -->
+		  ps_product.product_no,  <!-- 商品编号 -->
+		  ps_product.product_name,  <!-- 商品名称 -->
+		  ps_product.product_brief,  <!-- 商品描述 -->
+		  ps_product.mark_price,  <!-- 商品标价，售出商品的实际价格 -->
+		  ps_product.original_price,  <!-- 商品原价，商品原来的价格 -->
+		  ps_product.cost_price,  <!-- 商品成本价 -->
+		  ps_product.status,  <!-- 商品状态(1:未审核 2:审核通过 3:上架 4:下架) -->
+		  ps_product.create_time,  <!-- 创建时间 -->
+		  ps_product.update_time,  <!-- 修改时间 -->
+		  ps_product.userid,  <!-- userid -->
+		  ps_product.enable  <!-- 是否有效(0:删除 1:有效) -->
+	</sql>
+
+	<!-- Where精确匹配字段 -->
+	<sql id="equal">
+	   <if test="id != null ">
+		      AND id = #{id}  <!-- id -->
+		</if>
+	    <if test="product_no != null and product_no != ''">
+		      AND product_no = #{product_no}  <!-- 商品编号 -->
+		</if>
+	    <if test="product_name != null and product_name != ''">
+		      AND product_name = #{product_name}  <!-- 商品名称 -->
+		</if>
+	    <if test="product_brief != null and product_brief != ''">
+		      AND product_brief = #{product_brief}  <!-- 商品描述 -->
+		</if>
+	   <if test="mark_price != null ">
+		      AND mark_price = #{mark_price}  <!-- 商品标价，售出商品的实际价格 -->
+		</if>
+	   <if test="original_price != null ">
+		      AND original_price = #{original_price}  <!-- 商品原价，商品原来的价格 -->
+		</if>
+	   <if test="cost_price != null ">
+		      AND cost_price = #{cost_price}  <!-- 商品成本价 -->
+		</if>
+	   <if test="status != null ">
+		      AND status = #{status}  <!-- 商品状态(1:未审核 2:审核通过 3:上架 4:下架) -->
+		</if>
+	    <if test="create_time != null and create_time != ''">
+		      AND create_time = #{create_time}  <!-- 创建时间 -->
+		</if>
+	    <if test="update_time != null and update_time != ''">
+		      AND update_time = #{update_time}  <!-- 修改时间 -->
+		</if>
+	   <if test="userid != null ">
+		      AND userid = #{userid}  <!-- userid -->
+		</if>
+	   <if test="enable != null ">
+		      AND enable = #{enable}  <!-- 是否有效(0:删除 1:有效) -->
+		</if>
+	</sql>
+	
+	<!-- Where模糊匹配字段 -->
+	<sql id="like">
+	    <if test="product_no != null and product_no != ''">
+		      AND product_no like '%${product_no}%'  <!-- 商品编号 -->
+		</if>
+	    <if test="product_name != null and product_name != ''">
+		      AND product_name like '%${product_name}%'  <!-- 商品名称 -->
+		</if>
+	    <if test="product_brief != null and product_brief != ''">
+		      AND product_brief like '%${product_brief}%'  <!-- 商品描述 -->
+		</if>
+	    <if test="create_time != null and create_time != ''">
+		      AND create_time like '%${create_time}%'  <!-- 创建时间 -->
+		</if>
+	    <if test="update_time != null and update_time != ''">
+		      AND update_time like '%${update_time}%'  <!-- 修改时间 -->
+		</if>
+	</sql>
+	
+</mapper>

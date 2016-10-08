@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ps_shopping_cart[ps_shopping_cart]SQLMapper自动映射 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:26 -->
+<mapper namespace="com.hipishare.products.dao.mapper.Ps_shopping_cartMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_shopping_cartPO">
+		INSERT INTO ps_shopping_cart (
+		<if test="userid != null">
+	         userid, <!-- 用户id -->
+		</if>
+		<if test="create_time != null and create_time != ''">
+	         create_time, <!-- 购物车创建时间 -->
+		</if>
+		<if test="piece_num != null">
+	         piece_num, <!-- 商品件数 -->
+		</if>
+	          id
+		)VALUES(
+		<if test="userid != null">
+	          #{userid, jdbcType=INTEGER}, <!-- 用户id -->
+	    </if>
+		<if test="create_time != null and create_time != ''">
+	          #{create_time, jdbcType=VARCHAR}, <!-- 购物车创建时间 -->
+	    </if>
+		<if test="piece_num != null">
+	          #{piece_num, jdbcType=INTEGER}, <!-- 商品件数 -->
+	    </if>
+	          null
+		)
+	</insert>
+	
+	<!-- 插入一个数据持久化对象(含所有字段) -->
+	<insert id="insertAll" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_shopping_cartPO">
+		INSERT INTO ps_shopping_cart (
+		    <include refid="column" />
+		)
+		VALUES (
+		    #{id, jdbcType=INTEGER},  <!-- id -->
+		    #{userid, jdbcType=INTEGER},  <!-- 用户id -->
+		    #{create_time, jdbcType=VARCHAR},  <!-- 购物车创建时间 -->
+		    #{piece_num, jdbcType=INTEGER}  <!-- 商品件数 -->
+		)
+	</insert>
+
+	<!-- 根据主键修改数据持久化对象 -->
+	<update id="updateByKey" parameterType="Ps_shopping_cartPO">
+		UPDATE ps_shopping_cart
+		<set>
+			<if test="id != null">
+		          id = #{id, jdbcType=INTEGER},  <!-- id -->
+			</if>
+			<if test="userid != null">
+		          userid = #{userid, jdbcType=INTEGER},  <!-- 用户id -->
+			</if>
+			<if test="create_time != null">
+		          create_time = #{create_time, jdbcType=VARCHAR},  <!-- 购物车创建时间 -->
+			</if>
+			<if test="piece_num != null">
+		          piece_num = #{piece_num, jdbcType=INTEGER},  <!-- 商品件数 -->
+			</if>
+		</set>
+		WHERE  id = #{id}
+	</update>
+	
+	<!-- 根据主键删除数据持久化对象 -->
+	<delete id="deleteByKey">
+		DELETE FROM ps_shopping_cart WHERE  id = #{id}
+	</delete>
+
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByKey" resultType="Ps_shopping_cartPO">
+		SELECT
+		<include refid="column" />
+		FROM ps_shopping_cart WHERE  id = #{id}
+	</select>
+
+	<!-- 表字段 -->
+	<sql id="column">
+		  id,  <!-- id -->
+		  userid,  <!-- 用户id -->
+		  create_time,  <!-- 购物车创建时间 -->
+		  piece_num  <!-- 商品件数 -->
+	</sql>
+	
+	<!-- 表字段(用于外表的关联时引用) -->
+	<sql id="column2">
+		  ps_shopping_cart.id,  <!-- id -->
+		  ps_shopping_cart.userid,  <!-- 用户id -->
+		  ps_shopping_cart.create_time,  <!-- 购物车创建时间 -->
+		  ps_shopping_cart.piece_num  <!-- 商品件数 -->
+	</sql>
+
+	<!-- Where精确匹配字段 -->
+	<sql id="equal">
+	   <if test="id != null ">
+		      AND id = #{id}  <!-- id -->
+		</if>
+	   <if test="userid != null ">
+		      AND userid = #{userid}  <!-- 用户id -->
+		</if>
+	    <if test="create_time != null and create_time != ''">
+		      AND create_time = #{create_time}  <!-- 购物车创建时间 -->
+		</if>
+	   <if test="piece_num != null ">
+		      AND piece_num = #{piece_num}  <!-- 商品件数 -->
+		</if>
+	</sql>
+	
+	<!-- Where模糊匹配字段 -->
+	<sql id="like">
+	    <if test="create_time != null and create_time != ''">
+		      AND create_time like '%${create_time}%'  <!-- 购物车创建时间 -->
+		</if>
+	</sql>
+	
+</mapper>

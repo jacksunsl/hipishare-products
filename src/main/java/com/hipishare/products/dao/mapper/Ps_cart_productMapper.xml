@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ps_cart_product[ps_cart_product]SQLMapper自动映射 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:25 -->
+<mapper namespace="com.hipishare.products.dao.mapper.Ps_cart_productMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert"  parameterType="Ps_cart_productPO">
+		INSERT INTO ps_cart_product (
+		<if test="shopping_cart_id != null">
+	         shopping_cart_id, <!-- 购物车id -->
+		</if>
+		<if test="product_no != null and product_no != ''">
+	         product_no, <!-- 商品编号 -->
+		</if>
+		<if test="num != null">
+	         num, <!-- 商品数量 -->
+		</if>
+		<if test="push_time != null and push_time != ''">
+	         push_time, <!-- 放入购物车时间 -->
+		</if>
+		<if test="push_price != null">
+	         push_price, <!-- 放入时商品价格 -->
+		</if>
+		<if test="id != null">
+	          id  <!-- id -->
+	   </if>
+		)VALUES(
+		<if test="shopping_cart_id != null">
+	          #{shopping_cart_id, jdbcType=INTEGER}, <!-- 购物车id -->
+	    </if>
+		<if test="product_no != null and product_no != ''">
+	          #{product_no, jdbcType=VARCHAR}, <!-- 商品编号 -->
+	    </if>
+		<if test="num != null">
+	          #{num, jdbcType=INTEGER}, <!-- 商品数量 -->
+	    </if>
+		<if test="push_time != null and push_time != ''">
+	          #{push_time, jdbcType=VARCHAR}, <!-- 放入购物车时间 -->
+	    </if>
+		<if test="push_price != null">
+	          #{push_price, jdbcType=NUMERIC}, <!-- 放入时商品价格 -->
+	    </if>
+		<if test="id != null">
+		     #{id, jdbcType=INTEGER}  <!-- id -->
+	    </if>
+		)
+	</insert>
+	
+	<!-- 插入一个数据持久化对象(含所有字段) -->
+	<insert id="insertAll"  parameterType="Ps_cart_productPO">
+		INSERT INTO ps_cart_product (
+		    <include refid="column" />
+		)
+		VALUES (
+		    #{id, jdbcType=INTEGER},  <!-- id -->
+		    #{shopping_cart_id, jdbcType=INTEGER},  <!-- 购物车id -->
+		    #{product_no, jdbcType=VARCHAR},  <!-- 商品编号 -->
+		    #{num, jdbcType=INTEGER},  <!-- 商品数量 -->
+		    #{push_time, jdbcType=VARCHAR},  <!-- 放入购物车时间 -->
+		    #{push_price, jdbcType=NUMERIC}  <!-- 放入时商品价格 -->
+		)
+	</insert>
+
+	<!-- 根据主键修改数据持久化对象 -->
+	<update id="updateByKey" parameterType="Ps_cart_productPO">
+		UPDATE ps_cart_product
+		<set>
+			<if test="id != null">
+		          id = #{id, jdbcType=INTEGER},  <!-- id -->
+			</if>
+			<if test="shopping_cart_id != null">
+		          shopping_cart_id = #{shopping_cart_id, jdbcType=INTEGER},  <!-- 购物车id -->
+			</if>
+			<if test="product_no != null">
+		          product_no = #{product_no, jdbcType=VARCHAR},  <!-- 商品编号 -->
+			</if>
+			<if test="num != null">
+		          num = #{num, jdbcType=INTEGER},  <!-- 商品数量 -->
+			</if>
+			<if test="push_time != null">
+		          push_time = #{push_time, jdbcType=VARCHAR},  <!-- 放入购物车时间 -->
+			</if>
+			<if test="push_price != null">
+		          push_price = #{push_price, jdbcType=NUMERIC},  <!-- 放入时商品价格 -->
+			</if>
+		</set>
+		WHERE  id = #{id}
+	</update>
+	
+	<!-- 根据主键删除数据持久化对象 -->
+	<delete id="deleteByKey">
+		DELETE FROM ps_cart_product WHERE  id = #{id}
+	</delete>
+
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByKey" resultType="Ps_cart_productPO">
+		SELECT
+		<include refid="column" />
+		FROM ps_cart_product WHERE  id = #{id}
+	</select>
+
+	
+	<!-- 表字段 -->
+	<sql id="column">
+		  id,  <!-- id -->
+		  shopping_cart_id,  <!-- 购物车id -->
+		  product_no,  <!-- 商品编号 -->
+		  num,  <!-- 商品数量 -->
+		  push_time,  <!-- 放入购物车时间 -->
+		  push_price  <!-- 放入时商品价格 -->
+	</sql>
+	
+	<!-- 表字段(用于外表的关联时引用) -->
+	<sql id="column2">
+		  ps_cart_product.id,  <!-- id -->
+		  ps_cart_product.shopping_cart_id,  <!-- 购物车id -->
+		  ps_cart_product.product_no,  <!-- 商品编号 -->
+		  ps_cart_product.num,  <!-- 商品数量 -->
+		  ps_cart_product.push_time,  <!-- 放入购物车时间 -->
+		  ps_cart_product.push_price  <!-- 放入时商品价格 -->
+	</sql>
+
+	<!-- Where精确匹配字段 -->
+	<sql id="equal">
+	   <if test="id != null ">
+		      AND id = #{id}  <!-- id -->
+		</if>
+	   <if test="shopping_cart_id != null ">
+		      AND shopping_cart_id = #{shopping_cart_id}  <!-- 购物车id -->
+		</if>
+	    <if test="product_no != null and product_no != ''">
+		      AND product_no = #{product_no}  <!-- 商品编号 -->
+		</if>
+	   <if test="num != null ">
+		      AND num = #{num}  <!-- 商品数量 -->
+		</if>
+	    <if test="push_time != null and push_time != ''">
+		      AND push_time = #{push_time}  <!-- 放入购物车时间 -->
+		</if>
+	   <if test="push_price != null ">
+		      AND push_price = #{push_price}  <!-- 放入时商品价格 -->
+		</if>
+	</sql>
+	
+	<!-- Where模糊匹配字段 -->
+	<sql id="like">
+	    <if test="product_no != null and product_no != ''">
+		      AND product_no like '%${product_no}%'  <!-- 商品编号 -->
+		</if>
+	    <if test="push_time != null and push_time != ''">
+		      AND push_time like '%${push_time}%'  <!-- 放入购物车时间 -->
+		</if>
+	</sql>
+	
+</mapper>

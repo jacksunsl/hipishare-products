@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ps_purchasing_list[ps_purchasing_list]SQLMapper自动映射 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:26 -->
+<mapper namespace="com.hipishare.products.dao.mapper.Ps_purchasing_listMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_purchasing_listPO">
+		INSERT INTO ps_purchasing_list (
+		<if test="purchasing_no != null and purchasing_no != ''">
+	         purchasing_no, <!-- purchasing_no -->
+		</if>
+		<if test="total_amount != null">
+	         total_amount, <!-- total_amount -->
+		</if>
+		<if test="total_num != null">
+	         total_num, <!-- total_num -->
+		</if>
+		<if test="status != null">
+	         status, <!-- status -->
+		</if>
+		<if test="userid != null">
+	         userid, <!-- userid -->
+		</if>
+		<if test="create_time != null and create_time != ''">
+	         create_time, <!-- create_time -->
+		</if>
+		<if test="fee != null">
+	         fee, <!-- fee -->
+		</if>
+	          id
+		)VALUES(
+		<if test="purchasing_no != null and purchasing_no != ''">
+	          #{purchasing_no, jdbcType=VARCHAR}, <!-- purchasing_no -->
+	    </if>
+		<if test="total_amount != null">
+	          #{total_amount, jdbcType=NUMERIC}, <!-- total_amount -->
+	    </if>
+		<if test="total_num != null">
+	          #{total_num, jdbcType=INTEGER}, <!-- total_num -->
+	    </if>
+		<if test="status != null">
+	          #{status, jdbcType=INTEGER}, <!-- status -->
+	    </if>
+		<if test="userid != null">
+	          #{userid, jdbcType=INTEGER}, <!-- userid -->
+	    </if>
+		<if test="create_time != null and create_time != ''">
+	          #{create_time, jdbcType=VARCHAR}, <!-- create_time -->
+	    </if>
+		<if test="fee != null">
+	          #{fee, jdbcType=NUMERIC}, <!-- fee -->
+	    </if>
+	          null
+		)
+	</insert>
+	
+	<!-- 插入一个数据持久化对象(含所有字段) -->
+	<insert id="insertAll" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_purchasing_listPO">
+		INSERT INTO ps_purchasing_list (
+		    <include refid="column" />
+		)
+		VALUES (
+		    #{id, jdbcType=INTEGER},  <!-- id -->
+		    #{purchasing_no, jdbcType=VARCHAR},  <!-- purchasing_no -->
+		    #{total_amount, jdbcType=NUMERIC},  <!-- total_amount -->
+		    #{total_num, jdbcType=INTEGER},  <!-- total_num -->
+		    #{status, jdbcType=INTEGER},  <!-- status -->
+		    #{userid, jdbcType=INTEGER},  <!-- userid -->
+		    #{create_time, jdbcType=VARCHAR},  <!-- create_time -->
+		    #{fee, jdbcType=NUMERIC}  <!-- fee -->
+		)
+	</insert>
+
+	<!-- 根据主键修改数据持久化对象 -->
+	<update id="updateByKey" parameterType="Ps_purchasing_listPO">
+		UPDATE ps_purchasing_list
+		<set>
+			<if test="id != null">
+		          id = #{id, jdbcType=INTEGER},  <!-- id -->
+			</if>
+			<if test="purchasing_no != null">
+		          purchasing_no = #{purchasing_no, jdbcType=VARCHAR},  <!-- purchasing_no -->
+			</if>
+			<if test="total_amount != null">
+		          total_amount = #{total_amount, jdbcType=NUMERIC},  <!-- total_amount -->
+			</if>
+			<if test="total_num != null">
+		          total_num = #{total_num, jdbcType=INTEGER},  <!-- total_num -->
+			</if>
+			<if test="status != null">
+		          status = #{status, jdbcType=INTEGER},  <!-- status -->
+			</if>
+			<if test="userid != null">
+		          userid = #{userid, jdbcType=INTEGER},  <!-- userid -->
+			</if>
+			<if test="create_time != null">
+		          create_time = #{create_time, jdbcType=VARCHAR},  <!-- create_time -->
+			</if>
+			<if test="fee != null">
+		          fee = #{fee, jdbcType=NUMERIC},  <!-- fee -->
+			</if>
+		</set>
+		WHERE  id = #{id}
+	</update>
+	
+	<!-- 根据主键删除数据持久化对象 -->
+	<delete id="deleteByKey">
+		DELETE FROM ps_purchasing_list WHERE  id = #{id}
+	</delete>
+
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByKey" resultType="Ps_purchasing_listPO">
+		SELECT
+		<include refid="column" />
+		FROM ps_purchasing_list WHERE  id = #{id}
+	</select>
+	
+	<!-- 表字段 -->
+	<sql id="column">
+		  id,  <!-- id -->
+		  purchasing_no,  <!-- purchasing_no -->
+		  total_amount,  <!-- total_amount -->
+		  total_num,  <!-- total_num -->
+		  status,  <!-- status -->
+		  userid,  <!-- userid -->
+		  create_time,  <!-- create_time -->
+		  fee  <!-- fee -->
+	</sql>
+	
+	<!-- 表字段(用于外表的关联时引用) -->
+	<sql id="column2">
+		  ps_purchasing_list.id,  <!-- id -->
+		  ps_purchasing_list.purchasing_no,  <!-- purchasing_no -->
+		  ps_purchasing_list.total_amount,  <!-- total_amount -->
+		  ps_purchasing_list.total_num,  <!-- total_num -->
+		  ps_purchasing_list.status,  <!-- status -->
+		  ps_purchasing_list.userid,  <!-- userid -->
+		  ps_purchasing_list.create_time,  <!-- create_time -->
+		  ps_purchasing_list.fee  <!-- fee -->
+	</sql>
+
+	<!-- Where精确匹配字段 -->
+	<sql id="equal">
+	   <if test="id != null ">
+		      AND id = #{id}  <!-- id -->
+		</if>
+	    <if test="purchasing_no != null and purchasing_no != ''">
+		      AND purchasing_no = #{purchasing_no}  <!-- purchasing_no -->
+		</if>
+	   <if test="total_amount != null ">
+		      AND total_amount = #{total_amount}  <!-- total_amount -->
+		</if>
+	   <if test="total_num != null ">
+		      AND total_num = #{total_num}  <!-- total_num -->
+		</if>
+	   <if test="status != null ">
+		      AND status = #{status}  <!-- status -->
+		</if>
+	   <if test="userid != null ">
+		      AND userid = #{userid}  <!-- userid -->
+		</if>
+	    <if test="create_time != null and create_time != ''">
+		      AND create_time = #{create_time}  <!-- create_time -->
+		</if>
+	   <if test="fee != null ">
+		      AND fee = #{fee}  <!-- fee -->
+		</if>
+	</sql>
+	
+	<!-- Where模糊匹配字段 -->
+	<sql id="like">
+	    <if test="purchasing_no != null and purchasing_no != ''">
+		      AND purchasing_no like '%${purchasing_no}%'  <!-- purchasing_no -->
+		</if>
+	    <if test="create_time != null and create_time != ''">
+		      AND create_time like '%${create_time}%'  <!-- create_time -->
+		</if>
+	</sql>
+	
+</mapper>

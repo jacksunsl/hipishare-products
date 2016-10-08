@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ps_product_comment[ps_product_comment]SQLMapper自动映射 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:25 -->
+<mapper namespace="com.hipishare.products.dao.mapper.Ps_product_commentMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_product_commentPO">
+		INSERT INTO ps_product_comment (
+		<if test="product_no != null and product_no != ''">
+	         product_no, <!-- 商品编号 -->
+		</if>
+		<if test="order_no != null and order_no != ''">
+	         order_no, <!-- order_no -->
+		</if>
+		<if test="content != null and content != ''">
+	         content, <!-- content -->
+		</if>
+		<if test="userid != null">
+	         userid, <!-- userid -->
+		</if>
+		<if test="comment_time != null and comment_time != ''">
+	         comment_time, <!-- comment_time -->
+		</if>
+		<if test="score != null">
+	         score, <!-- 评价分数,五颗星满分 -->
+		</if>
+	          id
+		)VALUES(
+		<if test="product_no != null and product_no != ''">
+	          #{product_no, jdbcType=VARCHAR}, <!-- 商品编号 -->
+	    </if>
+		<if test="order_no != null and order_no != ''">
+	          #{order_no, jdbcType=VARCHAR}, <!-- order_no -->
+	    </if>
+		<if test="content != null and content != ''">
+	          #{content, jdbcType=VARCHAR}, <!-- content -->
+	    </if>
+		<if test="userid != null">
+	          #{userid, jdbcType=INTEGER}, <!-- userid -->
+	    </if>
+		<if test="comment_time != null and comment_time != ''">
+	          #{comment_time, jdbcType=VARCHAR}, <!-- comment_time -->
+	    </if>
+		<if test="score != null">
+	          #{score, jdbcType=INTEGER}, <!-- 评价分数,五颗星满分 -->
+	    </if>
+	          null
+		)
+	</insert>
+	
+	<!-- 插入一个数据持久化对象(含所有字段) -->
+	<insert id="insertAll" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_product_commentPO">
+		INSERT INTO ps_product_comment (
+		    <include refid="column" />
+		)
+		VALUES (
+		    #{id, jdbcType=INTEGER},  <!-- id -->
+		    #{product_no, jdbcType=VARCHAR},  <!-- 商品编号 -->
+		    #{order_no, jdbcType=VARCHAR},  <!-- order_no -->
+		    #{content, jdbcType=VARCHAR},  <!-- content -->
+		    #{userid, jdbcType=INTEGER},  <!-- userid -->
+		    #{comment_time, jdbcType=VARCHAR},  <!-- comment_time -->
+		    #{score, jdbcType=INTEGER}  <!-- 评价分数,五颗星满分 -->
+		)
+	</insert>
+
+	<!-- 根据主键修改数据持久化对象 -->
+	<update id="updateByKey" parameterType="Ps_product_commentPO">
+		UPDATE ps_product_comment
+		<set>
+			<if test="id != null">
+		          id = #{id, jdbcType=INTEGER},  <!-- id -->
+			</if>
+			<if test="product_no != null">
+		          product_no = #{product_no, jdbcType=VARCHAR},  <!-- 商品编号 -->
+			</if>
+			<if test="order_no != null">
+		          order_no = #{order_no, jdbcType=VARCHAR},  <!-- order_no -->
+			</if>
+			<if test="content != null">
+		          content = #{content, jdbcType=VARCHAR},  <!-- content -->
+			</if>
+			<if test="userid != null">
+		          userid = #{userid, jdbcType=INTEGER},  <!-- userid -->
+			</if>
+			<if test="comment_time != null">
+		          comment_time = #{comment_time, jdbcType=VARCHAR},  <!-- comment_time -->
+			</if>
+			<if test="score != null">
+		          score = #{score, jdbcType=INTEGER},  <!-- 评价分数,五颗星满分 -->
+			</if>
+		</set>
+		WHERE  id = #{id}
+	</update>
+	
+	<!-- 根据主键删除数据持久化对象 -->
+	<delete id="deleteByKey">
+		DELETE FROM ps_product_comment WHERE  id = #{id}
+	</delete>
+
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByKey" resultType="Ps_product_commentPO">
+		SELECT
+		<include refid="column" />
+		FROM ps_product_comment WHERE  id = #{id}
+	</select>
+
+	
+	<!-- 表字段 -->
+	<sql id="column">
+		  id,  <!-- id -->
+		  product_no,  <!-- 商品编号 -->
+		  order_no,  <!-- order_no -->
+		  content,  <!-- content -->
+		  userid,  <!-- userid -->
+		  comment_time,  <!-- comment_time -->
+		  score  <!-- 评价分数,五颗星满分 -->
+	</sql>
+	
+	<!-- 表字段(用于外表的关联时引用) -->
+	<sql id="column2">
+		  ps_product_comment.id,  <!-- id -->
+		  ps_product_comment.product_no,  <!-- 商品编号 -->
+		  ps_product_comment.order_no,  <!-- order_no -->
+		  ps_product_comment.content,  <!-- content -->
+		  ps_product_comment.userid,  <!-- userid -->
+		  ps_product_comment.comment_time,  <!-- comment_time -->
+		  ps_product_comment.score  <!-- 评价分数,五颗星满分 -->
+	</sql>
+
+	<!-- Where精确匹配字段 -->
+	<sql id="equal">
+	   <if test="id != null ">
+		      AND id = #{id}  <!-- id -->
+		</if>
+	    <if test="product_no != null and product_no != ''">
+		      AND product_no = #{product_no}  <!-- 商品编号 -->
+		</if>
+	    <if test="order_no != null and order_no != ''">
+		      AND order_no = #{order_no}  <!-- order_no -->
+		</if>
+	    <if test="content != null and content != ''">
+		      AND content = #{content}  <!-- content -->
+		</if>
+	   <if test="userid != null ">
+		      AND userid = #{userid}  <!-- userid -->
+		</if>
+	    <if test="comment_time != null and comment_time != ''">
+		      AND comment_time = #{comment_time}  <!-- comment_time -->
+		</if>
+	   <if test="score != null ">
+		      AND score = #{score}  <!-- 评价分数,五颗星满分 -->
+		</if>
+	</sql>
+	
+	<!-- Where模糊匹配字段 -->
+	<sql id="like">
+	    <if test="product_no != null and product_no != ''">
+		      AND product_no like '%${product_no}%'  <!-- 商品编号 -->
+		</if>
+	    <if test="order_no != null and order_no != ''">
+		      AND order_no like '%${order_no}%'  <!-- order_no -->
+		</if>
+	    <if test="content != null and content != ''">
+		      AND content like '%${content}%'  <!-- content -->
+		</if>
+	    <if test="comment_time != null and comment_time != ''">
+		      AND comment_time like '%${comment_time}%'  <!-- comment_time -->
+		</if>
+	</sql>
+	
+</mapper>

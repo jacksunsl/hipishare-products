@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- ps_shopping_list_log[ps_shopping_list_log]SQLMapper自动映射 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:26 -->
+<mapper namespace="com.hipishare.products.dao.mapper.Ps_shopping_list_logMapper">
+	
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_shopping_list_logPO">
+		INSERT INTO ps_shopping_list_log (
+		<if test="list_no != null and list_no != ''">
+	         list_no, <!-- 清单编号 -->
+		</if>
+		<if test="list_status != null">
+	         list_status, <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+		</if>
+		<if test="change_time != null and change_time != ''">
+	         change_time, <!-- 变更时间 -->
+		</if>
+		<if test="remark != null and remark != ''">
+	         remark, <!-- 变更备注 -->
+		</if>
+		<if test="userid != null">
+	         userid, <!-- 操作人id -->
+		</if>
+	          id
+		)VALUES(
+		<if test="list_no != null and list_no != ''">
+	          #{list_no, jdbcType=VARCHAR}, <!-- 清单编号 -->
+	    </if>
+		<if test="list_status != null">
+	          #{list_status, jdbcType=INTEGER}, <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+	    </if>
+		<if test="change_time != null and change_time != ''">
+	          #{change_time, jdbcType=VARCHAR}, <!-- 变更时间 -->
+	    </if>
+		<if test="remark != null and remark != ''">
+	          #{remark, jdbcType=VARCHAR}, <!-- 变更备注 -->
+	    </if>
+		<if test="userid != null">
+	          #{userid, jdbcType=INTEGER}, <!-- 操作人id -->
+	    </if>
+	          null
+		)
+	</insert>
+	
+	<!-- 插入一个数据持久化对象(含所有字段) -->
+	<insert id="insertAll" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_shopping_list_logPO">
+		INSERT INTO ps_shopping_list_log (
+		    <include refid="column" />
+		)
+		VALUES (
+		    #{id, jdbcType=INTEGER},  <!-- id -->
+		    #{list_no, jdbcType=VARCHAR},  <!-- 清单编号 -->
+		    #{list_status, jdbcType=INTEGER},  <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+		    #{change_time, jdbcType=VARCHAR},  <!-- 变更时间 -->
+		    #{remark, jdbcType=VARCHAR},  <!-- 变更备注 -->
+		    #{userid, jdbcType=INTEGER}  <!-- 操作人id -->
+		)
+	</insert>
+
+	<!-- 根据主键修改数据持久化对象 -->
+	<update id="updateByKey" parameterType="Ps_shopping_list_logPO">
+		UPDATE ps_shopping_list_log
+		<set>
+			<if test="id != null">
+		          id = #{id, jdbcType=INTEGER},  <!-- id -->
+			</if>
+			<if test="list_no != null">
+		          list_no = #{list_no, jdbcType=VARCHAR},  <!-- 清单编号 -->
+			</if>
+			<if test="list_status != null">
+		          list_status = #{list_status, jdbcType=INTEGER},  <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+			</if>
+			<if test="change_time != null">
+		          change_time = #{change_time, jdbcType=VARCHAR},  <!-- 变更时间 -->
+			</if>
+			<if test="remark != null">
+		          remark = #{remark, jdbcType=VARCHAR},  <!-- 变更备注 -->
+			</if>
+			<if test="userid != null">
+		          userid = #{userid, jdbcType=INTEGER},  <!-- 操作人id -->
+			</if>
+		</set>
+		WHERE  id = #{id}
+	</update>
+	
+	<!-- 根据主键删除数据持久化对象 -->
+	<delete id="deleteByKey">
+		DELETE FROM ps_shopping_list_log WHERE  id = #{id}
+	</delete>
+
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByKey" resultType="Ps_shopping_list_logPO">
+		SELECT
+		<include refid="column" />
+		FROM ps_shopping_list_log WHERE  id = #{id}
+	</select>
+	
+	<!-- 表字段 -->
+	<sql id="column">
+		  id,  <!-- id -->
+		  list_no,  <!-- 清单编号 -->
+		  list_status,  <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+		  change_time,  <!-- 变更时间 -->
+		  remark,  <!-- 变更备注 -->
+		  userid  <!-- 操作人id -->
+	</sql>
+	
+	<!-- 表字段(用于外表的关联时引用) -->
+	<sql id="column2">
+		  ps_shopping_list_log.id,  <!-- id -->
+		  ps_shopping_list_log.list_no,  <!-- 清单编号 -->
+		  ps_shopping_list_log.list_status,  <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+		  ps_shopping_list_log.change_time,  <!-- 变更时间 -->
+		  ps_shopping_list_log.remark,  <!-- 变更备注 -->
+		  ps_shopping_list_log.userid  <!-- 操作人id -->
+	</sql>
+
+	<!-- Where精确匹配字段 -->
+	<sql id="equal">
+	   <if test="id != null ">
+		      AND id = #{id}  <!-- id -->
+		</if>
+	    <if test="list_no != null and list_no != ''">
+		      AND list_no = #{list_no}  <!-- 清单编号 -->
+		</if>
+	   <if test="list_status != null ">
+		      AND list_status = #{list_status}  <!-- 购物清单状态，1:出单 2:接单 3:采购中 4:中断 5:完成 6:丢弃 -->
+		</if>
+	    <if test="change_time != null and change_time != ''">
+		      AND change_time = #{change_time}  <!-- 变更时间 -->
+		</if>
+	    <if test="remark != null and remark != ''">
+		      AND remark = #{remark}  <!-- 变更备注 -->
+		</if>
+	   <if test="userid != null ">
+		      AND userid = #{userid}  <!-- 操作人id -->
+		</if>
+	</sql>
+	
+	<!-- Where模糊匹配字段 -->
+	<sql id="like">
+	    <if test="list_no != null and list_no != ''">
+		      AND list_no like '%${list_no}%'  <!-- 清单编号 -->
+		</if>
+	    <if test="change_time != null and change_time != ''">
+		      AND change_time like '%${change_time}%'  <!-- 变更时间 -->
+		</if>
+	    <if test="remark != null and remark != ''">
+		      AND remark like '%${remark}%'  <!-- 变更备注 -->
+		</if>
+	</sql>
+	
+</mapper>
