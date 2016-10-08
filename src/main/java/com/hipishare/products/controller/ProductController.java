@@ -4,6 +4,12 @@ import org.apache.log4j.Logger;
 import org.restexpress.Request;
 import org.restexpress.Response;
 
+import com.hipishare.products.controller.helper.ProductHelper;
+import com.hipishare.products.controller.helper.ProductServerHelper;
+import com.hipishare.products.domain.ProductReq;
+import com.hipishare.products.domain.RequestObject;
+import com.hipishare.products.domain.ResponseObject;
+import com.hipishare.products.exception.ProductSystemException;
 import com.hipishare.products.service.ProductService;
 import com.hipishare.products.utils.SpringContextUtil;
 
@@ -12,7 +18,7 @@ import com.hipishare.products.utils.SpringContextUtil;
  * @author sunlei
  * @date 2016年9月26日
  */
-public class ProductController {
+public class ProductController extends ProductServerHelper {
 
 	private static final Logger LOGGER = Logger.getLogger(ProductController.class);
 	
@@ -34,7 +40,29 @@ public class ProductController {
 	 * @return
 	 */
 	public Object addProduct(Request request, Response response) {
-		productService.addProduct();
+		LOGGER.info("[ProductController.addProduct][begin]");
+		ResponseObject responseObject = new ResponseObject();
+		try {
+			// 业务预处理
+			RequestObject requestObject = preDobusiness(request);
+			
+			// 解析业务请求数据
+			LOGGER.info("[ProductController.addProduct][data]"+requestObject.getData());
+			ProductReq productReq = gson.fromJson(requestObject.getData(), ProductReq.class);
+			
+			// 验证请求参数
+			ProductHelper.validAddProduct(productReq);
+			
+			// 业务处理
+			productService.addProduct(productReq);
+			
+		} catch(ProductSystemException e) {
+			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+		} catch(Exception e) {
+			e.printStackTrace();
+			LOGGER.error("商品服务系统异常，请稍后再试。");
+		}
 		return null;
 	}
 	

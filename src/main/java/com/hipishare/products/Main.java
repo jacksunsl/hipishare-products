@@ -45,7 +45,7 @@ public class Main
 		
 		mapExceptions(server);
 		server.bind();
-		LOGGER.info("card_server服务启动成功...");
+		LOGGER.info("product_server服务启动成功...");
 		server.awaitShutdown();
 	}
 
