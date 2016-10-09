@@ -59,4 +59,11 @@ public interface Ps_shopping_cartMapper {
 	 */
 	int deleteByKey(@Param(value = "id") Integer id);
 	
+	/**
+	 * 根据用户id查询购物车
+	 * @param userid
+	 * @return
+	 */
+	Ps_shopping_cartPO findByUserid(Integer userid);
+	
 }

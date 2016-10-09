@@ -117,4 +117,7 @@
 		</if>
 	</sql>
 	
+	<select id="findByUserid" parameterType="java.lang.Integer" resultType="Ps_shopping_cartPO">
+		select id, userid, create_time, piece_num from ps_shopping_cart WHERE userid = #userid#
+	</select>
 </mapper>

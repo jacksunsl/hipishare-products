@@ -56,14 +56,20 @@ public class ProductController extends ProductServerHelper {
 			// 业务处理
 			productService.addProduct(productReq);
 			
+			responseObject.setCode("00");
+			responseObject.setMsg("新增商品成功！");
 		} catch(ProductSystemException e) {
+			responseObject.setCode(e.getCode());
+			responseObject.setMsg(e.getMessage());
 			e.printStackTrace();
 			LOGGER.error(e.getMessage());
 		} catch(Exception e) {
+			responseObject.setCode("99");
+			responseObject.setMsg("新增商品失败，请稍后再试。");
 			e.printStackTrace();
 			LOGGER.error("商品服务系统异常，请稍后再试。");
 		}
-		return null;
+		return responseObject;
 	}
 	
 	/**
