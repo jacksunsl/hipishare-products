@@ -9,7 +9,15 @@ import java.util.List;
  */
 public class ShoppingCartReq {
 	private String userid;// 用户id
+	private String cartNo;// 购物车编号
 	private List<ShoppingProductReq> productList;
+	
+	public String getCartNo() {
+		return cartNo;
+	}
+	public void setCartNo(String cartNo) {
+		this.cartNo = cartNo;
+	}
 	public String getUserid() {
 		return userid;
 	}

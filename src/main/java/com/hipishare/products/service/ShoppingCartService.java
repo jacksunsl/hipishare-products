@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.hipishare.products.dao.mapper.Ps_cart_productMapper;
 import com.hipishare.products.dao.mapper.Ps_shopping_cartMapper;
 import com.hipishare.products.dao.po.Ps_cart_productPO;
 import com.hipishare.products.dao.po.Ps_shopping_cartPO;
@@ -26,6 +27,9 @@ public class ShoppingCartService {
 	
 	@Autowired
 	private Ps_shopping_cartMapper shoppingCartMapper;
+
+	@Autowired
+	private Ps_cart_productMapper cartProductMapper;
 	
 	/**
 	 * 把商品放入购物车
@@ -35,11 +39,16 @@ public class ShoppingCartService {
 	 */
 	@Transactional
 	public int putProductToCart(ShoppingCartReq shoppingCartReq) throws ProductSystemException {
+		LOG.info("[ShoppingCartService.putProductToCart][begin]");
 		// 根据用户id查询购物车
 		Ps_shopping_cartPO shoppingCart = shoppingCartMapper.findByUserid(Integer.parseInt(shoppingCartReq.getUserid()));
+		
+		// 获取购物车编号
+		String cartNo = "cartno8901387842";
 		if (null == shoppingCart) {
 			// 新增购物车
 			shoppingCart = new Ps_shopping_cartPO();
+			shoppingCart.setCart_no(cartNo);
 			shoppingCart.setCreate_time(new Date());
 			shoppingCart.setPiece_num(0);
 			shoppingCart.setUserid(Integer.parseInt(shoppingCartReq.getUserid()));
@@ -52,17 +61,96 @@ public class ShoppingCartService {
 			List<ShoppingProductReq> productReqList = shoppingCartReq.getProductList();
 			for (int i=0;i < productReqList.size();i++) {
 				Ps_cart_productPO product = new Ps_cart_productPO();
-				product.setProduct_no(productReqList.get(i).getProductNo());
 				// 根据商品编号查询商品是否在购物车中，如果在，直接修改数量
-				product.setNum(Integer.parseInt(productReqList.get(i).getNum()));
-				product.setPush_price(new BigDecimal(productReqList.get(i).getMarkPrice()));
-				product.setPush_time(new Date());
-				product.setShopping_cart_id(shoppingCart.getId());
-				cartProductList.add(product);
+				Ps_cart_productPO cartProduct = cartProductMapper.findByProductNo(cartNo, productReqList.get(i).getProductNo());
+				if (null != cartProduct) {// 如果购物车中已经有该商品，直接增加数量即可
+					cartProduct.setNum(Integer.parseInt(productReqList.get(i).getNum()) + cartProduct.getNum());
+					cartProduct.setPush_time(new Date());
+					cartProductMapper.updateByKey(cartProduct);
+				} else {
+					product.setProduct_no(productReqList.get(i).getProductNo());
+					product.setNum(Integer.parseInt(productReqList.get(i).getNum()));
+					product.setPush_price(new BigDecimal(productReqList.get(i).getMarkPrice()));
+					product.setPush_time(new Date());
+					product.setCart_no(cartNo);
+					cartProductList.add(product);
+				}
 			}
 		}
-		
+		LOG.info("[ShoppingCartService.putProductToCart][end]");
 		return 1;
 	}
+
+	/**
+	 * 清空购物车
+	 * @param shoppingCartReq
+	 * @throws ProductSystemException
+	 */
+	@Transactional
+	public void emptyCart(ShoppingCartReq shoppingCartReq) throws ProductSystemException {
+		cartProductMapper.deleteAllProductFromCart(shoppingCartReq.getCartNo());
+	}
 	
+	/**
+	 * 把商品移出购物车
+	 * @param shoppingCartReq
+	 * @throws ProductSystemException
+	 */
+	@Transactional
+	public void removeFromCart(ShoppingCartReq shoppingCartReq) throws ProductSystemException {
+		if (null != shoppingCartReq.getProductList()) {
+			for (int i=0;i<shoppingCartReq.getProductList().size();i++) {
+				cartProductMapper.deleteProductFromCart(shoppingCartReq.getCartNo(), 
+						shoppingCartReq.getProductList().get(i).getProductNo());
+			}
+		}
+	}
+
+	/**
+	 * 增加购物车商品数量
+	 * @param shoppingCartReq
+	 * @throws ProductSystemException
+	 */
+	@Transactional
+	public void plusProductNum(ShoppingCartReq shoppingCartReq) throws ProductSystemException {
+		if (null != shoppingCartReq.getProductList()) {
+			for (int i=0;i<shoppingCartReq.getProductList().size();i++) {
+				Ps_cart_productPO cartProduct = cartProductMapper.findByProductNo(shoppingCartReq.getCartNo(), 
+						shoppingCartReq.getProductList().get(i).getProductNo());
+				if (null == cartProduct) {
+					ProductSystemException.raise("3009");
+				}
+				cartProduct.setNum(cartProduct.getNum() + 
+						Integer.parseInt(shoppingCartReq.getProductList().get(i).getNum()));
+				cartProduct.setPush_time(new Date());
+				cartProductMapper.updateByKey(cartProduct);
+			}
+		}
+	}
+
+	/**
+	 * 减少购物车商品数量
+	 * @param shoppingCartReq
+	 * @throws ProductSystemException
+	 */
+	@Transactional
+	public void subProductNum(ShoppingCartReq shoppingCartReq) throws ProductSystemException {
+		if (null != shoppingCartReq.getProductList()) {
+			for (int i=0;i<shoppingCartReq.getProductList().size();i++) {
+				Ps_cart_productPO cartProduct = cartProductMapper.findByProductNo(shoppingCartReq.getCartNo(), 
+						shoppingCartReq.getProductList().get(i).getProductNo());
+				if (null == cartProduct) {
+					ProductSystemException.raise("3009");
+				}
+				int num = cartProduct.getNum() - Integer.parseInt(shoppingCartReq.getProductList().get(i).getNum());
+				if (num < 1) {// 删减数量不能小于1
+					cartProduct.setNum(1);
+				} else {
+					cartProduct.setNum(num);
+				}
+				cartProduct.setPush_time(new Date());
+				cartProductMapper.updateByKey(cartProduct);
+			}
+		}
+	}
 }

@@ -1,6 +1,7 @@
 package com.hipishare.products.dao.mapper;
 
 import org.apache.ibatis.annotations.Param;
+
 import com.hipishare.products.dao.po.Ps_cart_productPO;
 
 /**
@@ -11,7 +12,7 @@ import com.hipishare.products.dao.po.Ps_cart_productPO;
  * </p>
  * 
  * @author sunlei
- * @date 2016-10-08 11:54:25
+ * @date 2016-10-10 15:55:12
  */
 public interface Ps_cart_productMapper {
 
@@ -58,4 +59,26 @@ public interface Ps_cart_productMapper {
 	 */
 	int deleteByKey(@Param(value = "id") Integer id);
 	
+	/**
+	 * 根据商品编号查找购物车内的商品
+	 * @return
+	 */
+	Ps_cart_productPO findByProductNo(@Param(value = "cartNo") String cartNo, @Param(value = "productNo") String productNo);
+
+	/**
+	 * 清空购物车中的商品
+	 * @param cartNo
+	 * @return
+	 */
+	int deleteAllProductFromCart(@Param(value = "cartNo") String cartNo);
+	
+	/**
+	 * 删除购物车内的商品
+	 * @param cartNo
+	 * @param productNo
+	 * @return
+	 */
+	int deleteProductFromCart(@Param(value = "cartNo") String cartNo, @Param(value = "productNo") String productNo);
+	
+	int updateCartProductNum(Ps_cart_productPO ps_cart_productPO);
 }

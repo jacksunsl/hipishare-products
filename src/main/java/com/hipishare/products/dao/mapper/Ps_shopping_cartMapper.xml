@@ -3,12 +3,15 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- ps_shopping_cart[ps_shopping_cart]SQLMapper自动映射 -->
-<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:26 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-10 15:55:13 -->
 <mapper namespace="com.hipishare.products.dao.mapper.Ps_shopping_cartMapper">
 	
 	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Ps_shopping_cartPO">
 		INSERT INTO ps_shopping_cart (
+		<if test="cart_no != null and cart_no != ''">
+	         cart_no, <!-- 购物车编号 -->
+		</if>
 		<if test="userid != null">
 	         userid, <!-- 用户id -->
 		</if>
@@ -20,6 +23,9 @@
 		</if>
 	          id
 		)VALUES(
+		<if test="cart_no != null and cart_no != ''">
+	          #{cart_no, jdbcType=VARCHAR}, <!-- 购物车编号 -->
+	    </if>
 		<if test="userid != null">
 	          #{userid, jdbcType=INTEGER}, <!-- 用户id -->
 	    </if>
@@ -40,6 +46,7 @@
 		)
 		VALUES (
 		    #{id, jdbcType=INTEGER},  <!-- id -->
+		    #{cart_no, jdbcType=VARCHAR},  <!-- 购物车编号 -->
 		    #{userid, jdbcType=INTEGER},  <!-- 用户id -->
 		    #{create_time, jdbcType=VARCHAR},  <!-- 购物车创建时间 -->
 		    #{piece_num, jdbcType=INTEGER}  <!-- 商品件数 -->
@@ -52,6 +59,9 @@
 		<set>
 			<if test="id != null">
 		          id = #{id, jdbcType=INTEGER},  <!-- id -->
+			</if>
+			<if test="cart_no != null">
+		          cart_no = #{cart_no, jdbcType=VARCHAR},  <!-- 购物车编号 -->
 			</if>
 			<if test="userid != null">
 		          userid = #{userid, jdbcType=INTEGER},  <!-- 用户id -->
@@ -77,10 +87,11 @@
 		<include refid="column" />
 		FROM ps_shopping_cart WHERE  id = #{id}
 	</select>
-
+	
 	<!-- 表字段 -->
 	<sql id="column">
 		  id,  <!-- id -->
+		  cart_no,  <!-- 购物车编号 -->
 		  userid,  <!-- 用户id -->
 		  create_time,  <!-- 购物车创建时间 -->
 		  piece_num  <!-- 商品件数 -->
@@ -89,6 +100,7 @@
 	<!-- 表字段(用于外表的关联时引用) -->
 	<sql id="column2">
 		  ps_shopping_cart.id,  <!-- id -->
+		  ps_shopping_cart.cart_no,  <!-- 购物车编号 -->
 		  ps_shopping_cart.userid,  <!-- 用户id -->
 		  ps_shopping_cart.create_time,  <!-- 购物车创建时间 -->
 		  ps_shopping_cart.piece_num  <!-- 商品件数 -->
@@ -98,6 +110,9 @@
 	<sql id="equal">
 	   <if test="id != null ">
 		      AND id = #{id}  <!-- id -->
+		</if>
+	    <if test="cart_no != null and cart_no != ''">
+		      AND cart_no = #{cart_no}  <!-- 购物车编号 -->
 		</if>
 	   <if test="userid != null ">
 		      AND userid = #{userid}  <!-- 用户id -->
@@ -112,6 +127,9 @@
 	
 	<!-- Where模糊匹配字段 -->
 	<sql id="like">
+	    <if test="cart_no != null and cart_no != ''">
+		      AND cart_no like '%${cart_no}%'  <!-- 购物车编号 -->
+		</if>
 	    <if test="create_time != null and create_time != ''">
 		      AND create_time like '%${create_time}%'  <!-- 购物车创建时间 -->
 		</if>
@@ -120,4 +138,5 @@
 	<select id="findByUserid" parameterType="java.lang.Integer" resultType="Ps_shopping_cartPO">
 		select id, userid, create_time, piece_num from ps_shopping_cart WHERE userid = #userid#
 	</select>
+	
 </mapper>

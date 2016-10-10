@@ -12,7 +12,7 @@ import com.hipishare.products.dao.po.Ps_shopping_cartPO;
  * </p>
  * 
  * @author sunlei
- * @date 2016-10-08 11:54:26
+ * @date 2016-10-10 15:55:13
  */
 public interface Ps_shopping_cartMapper {
 
@@ -51,7 +51,6 @@ public interface Ps_shopping_cartMapper {
 	 */
 	Ps_shopping_cartPO selectByKey(@Param(value = "id") Integer id);
 
-
 	/**
 	 * 根据主键删除数据持久化对象
 	 *
@@ -64,6 +63,6 @@ public interface Ps_shopping_cartMapper {
 	 * @param userid
 	 * @return
 	 */
-	Ps_shopping_cartPO findByUserid(Integer userid);
+	Ps_shopping_cartPO findByUserid(@Param(value = "userid") Integer userid);
 	
 }

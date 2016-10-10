@@ -10,7 +10,7 @@ import java.util.Date;
  * </p>
  * 
  * @author sunlei
- * @date 2016-10-08 11:54:25
+ * @date 2016-10-10 15:55:11
  */
 public class Ps_cart_productPO {
 
@@ -20,9 +20,9 @@ public class Ps_cart_productPO {
 	private Integer id;
 	
 	/**
-	 * 购物车id
+	 * 购物车编号
 	 */
-	private Integer shopping_cart_id;
+	private String cart_no;
 	
 	/**
 	 * 商品编号
@@ -55,12 +55,12 @@ public class Ps_cart_productPO {
 	}
 	
 	/**
-	 * 购物车id
+	 * 购物车编号
 	 * 
-	 * @return shopping_cart_id
+	 * @return cart_no
 	 */
-	public Integer getShopping_cart_id() {
-		return shopping_cart_id;
+	public String getCart_no() {
+		return cart_no;
 	}
 	
 	/**
@@ -110,12 +110,12 @@ public class Ps_cart_productPO {
 	}
 	
 	/**
-	 * 购物车id
+	 * 购物车编号
 	 * 
-	 * @param shopping_cart_id
+	 * @param cart_no
 	 */
-	public void setShopping_cart_id(Integer shopping_cart_id) {
-		this.shopping_cart_id = shopping_cart_id;
+	public void setCart_no(String cart_no) {
+		this.cart_no = cart_no;
 	}
 	
 	/**
