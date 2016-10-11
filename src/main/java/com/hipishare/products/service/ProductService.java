@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hipishare.products.dao.mapper.Ps_productMapper;
 import com.hipishare.products.dao.po.Ps_productPO;
-import com.hipishare.products.domain.ProductReq;
+import com.hipishare.products.domain.request.ProductReq;
 import com.hipishare.products.exception.ProductSystemException;
 
 @Service("productService")

@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- ps_product_comment[ps_product_comment]SQLMapper自动映射 -->
-<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:25 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-11 16:49:29 -->
 <mapper namespace="com.hipishare.products.dao.mapper.Ps_product_commentMapper">
 	
 	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
@@ -13,19 +13,25 @@
 	         product_no, <!-- 商品编号 -->
 		</if>
 		<if test="order_no != null and order_no != ''">
-	         order_no, <!-- order_no -->
+	         order_no, <!-- 订单编号 -->
 		</if>
 		<if test="content != null and content != ''">
-	         content, <!-- content -->
+	         content, <!-- 评价内容 -->
 		</if>
 		<if test="userid != null">
-	         userid, <!-- userid -->
+	         userid, <!-- 评价用户 -->
 		</if>
 		<if test="comment_time != null and comment_time != ''">
-	         comment_time, <!-- comment_time -->
+	         comment_time, <!-- 评价时间 -->
 		</if>
 		<if test="score != null">
 	         score, <!-- 评价分数,五颗星满分 -->
+		</if>
+		<if test="status != null">
+	         status, <!-- 评论状态：1.正常 2.屏蔽 -->
+		</if>
+		<if test="enable != null">
+	         enable, <!-- 是否有效(0:删除 1:有效) -->
 		</if>
 	          id
 		)VALUES(
@@ -33,19 +39,25 @@
 	          #{product_no, jdbcType=VARCHAR}, <!-- 商品编号 -->
 	    </if>
 		<if test="order_no != null and order_no != ''">
-	          #{order_no, jdbcType=VARCHAR}, <!-- order_no -->
+	          #{order_no, jdbcType=VARCHAR}, <!-- 订单编号 -->
 	    </if>
 		<if test="content != null and content != ''">
-	          #{content, jdbcType=VARCHAR}, <!-- content -->
+	          #{content, jdbcType=VARCHAR}, <!-- 评价内容 -->
 	    </if>
 		<if test="userid != null">
-	          #{userid, jdbcType=INTEGER}, <!-- userid -->
+	          #{userid, jdbcType=INTEGER}, <!-- 评价用户 -->
 	    </if>
 		<if test="comment_time != null and comment_time != ''">
-	          #{comment_time, jdbcType=VARCHAR}, <!-- comment_time -->
+	          #{comment_time, jdbcType=VARCHAR}, <!-- 评价时间 -->
 	    </if>
 		<if test="score != null">
 	          #{score, jdbcType=INTEGER}, <!-- 评价分数,五颗星满分 -->
+	    </if>
+		<if test="status != null">
+	          #{status, jdbcType=INTEGER}, <!-- 评论状态：1.正常 2.屏蔽 -->
+	    </if>
+		<if test="enable != null">
+	          #{enable, jdbcType=INTEGER}, <!-- 是否有效(0:删除 1:有效) -->
 	    </if>
 	          null
 		)
@@ -59,11 +71,13 @@
 		VALUES (
 		    #{id, jdbcType=INTEGER},  <!-- id -->
 		    #{product_no, jdbcType=VARCHAR},  <!-- 商品编号 -->
-		    #{order_no, jdbcType=VARCHAR},  <!-- order_no -->
-		    #{content, jdbcType=VARCHAR},  <!-- content -->
-		    #{userid, jdbcType=INTEGER},  <!-- userid -->
-		    #{comment_time, jdbcType=VARCHAR},  <!-- comment_time -->
-		    #{score, jdbcType=INTEGER}  <!-- 评价分数,五颗星满分 -->
+		    #{order_no, jdbcType=VARCHAR},  <!-- 订单编号 -->
+		    #{content, jdbcType=VARCHAR},  <!-- 评价内容 -->
+		    #{userid, jdbcType=INTEGER},  <!-- 评价用户 -->
+		    #{comment_time, jdbcType=VARCHAR},  <!-- 评价时间 -->
+		    #{score, jdbcType=INTEGER},  <!-- 评价分数,五颗星满分 -->
+		    #{status, jdbcType=INTEGER},  <!-- 评论状态：1.正常 2.屏蔽 -->
+		    #{enable, jdbcType=INTEGER}  <!-- 是否有效(0:删除 1:有效) -->
 		)
 	</insert>
 
@@ -78,19 +92,25 @@
 		          product_no = #{product_no, jdbcType=VARCHAR},  <!-- 商品编号 -->
 			</if>
 			<if test="order_no != null">
-		          order_no = #{order_no, jdbcType=VARCHAR},  <!-- order_no -->
+		          order_no = #{order_no, jdbcType=VARCHAR},  <!-- 订单编号 -->
 			</if>
 			<if test="content != null">
-		          content = #{content, jdbcType=VARCHAR},  <!-- content -->
+		          content = #{content, jdbcType=VARCHAR},  <!-- 评价内容 -->
 			</if>
 			<if test="userid != null">
-		          userid = #{userid, jdbcType=INTEGER},  <!-- userid -->
+		          userid = #{userid, jdbcType=INTEGER},  <!-- 评价用户 -->
 			</if>
 			<if test="comment_time != null">
-		          comment_time = #{comment_time, jdbcType=VARCHAR},  <!-- comment_time -->
+		          comment_time = #{comment_time, jdbcType=VARCHAR},  <!-- 评价时间 -->
 			</if>
 			<if test="score != null">
 		          score = #{score, jdbcType=INTEGER},  <!-- 评价分数,五颗星满分 -->
+			</if>
+			<if test="status != null">
+		          status = #{status, jdbcType=INTEGER},  <!-- 评论状态：1.正常 2.屏蔽 -->
+			</if>
+			<if test="enable != null">
+		          enable = #{enable, jdbcType=INTEGER},  <!-- 是否有效(0:删除 1:有效) -->
 			</if>
 		</set>
 		WHERE  id = #{id}
@@ -108,27 +128,30 @@
 		FROM ps_product_comment WHERE  id = #{id}
 	</select>
 
-	
 	<!-- 表字段 -->
 	<sql id="column">
 		  id,  <!-- id -->
 		  product_no,  <!-- 商品编号 -->
-		  order_no,  <!-- order_no -->
-		  content,  <!-- content -->
-		  userid,  <!-- userid -->
-		  comment_time,  <!-- comment_time -->
-		  score  <!-- 评价分数,五颗星满分 -->
+		  order_no,  <!-- 订单编号 -->
+		  content,  <!-- 评价内容 -->
+		  userid,  <!-- 评价用户 -->
+		  comment_time,  <!-- 评价时间 -->
+		  score,  <!-- 评价分数,五颗星满分 -->
+		  status,  <!-- 评论状态：1.正常 2.屏蔽 -->
+		  enable  <!-- 是否有效(0:删除 1:有效) -->
 	</sql>
 	
 	<!-- 表字段(用于外表的关联时引用) -->
 	<sql id="column2">
 		  ps_product_comment.id,  <!-- id -->
 		  ps_product_comment.product_no,  <!-- 商品编号 -->
-		  ps_product_comment.order_no,  <!-- order_no -->
-		  ps_product_comment.content,  <!-- content -->
-		  ps_product_comment.userid,  <!-- userid -->
-		  ps_product_comment.comment_time,  <!-- comment_time -->
-		  ps_product_comment.score  <!-- 评价分数,五颗星满分 -->
+		  ps_product_comment.order_no,  <!-- 订单编号 -->
+		  ps_product_comment.content,  <!-- 评价内容 -->
+		  ps_product_comment.userid,  <!-- 评价用户 -->
+		  ps_product_comment.comment_time,  <!-- 评价时间 -->
+		  ps_product_comment.score,  <!-- 评价分数,五颗星满分 -->
+		  ps_product_comment.status,  <!-- 评论状态：1.正常 2.屏蔽 -->
+		  ps_product_comment.enable  <!-- 是否有效(0:删除 1:有效) -->
 	</sql>
 
 	<!-- Where精确匹配字段 -->
@@ -140,19 +163,25 @@
 		      AND product_no = #{product_no}  <!-- 商品编号 -->
 		</if>
 	    <if test="order_no != null and order_no != ''">
-		      AND order_no = #{order_no}  <!-- order_no -->
+		      AND order_no = #{order_no}  <!-- 订单编号 -->
 		</if>
 	    <if test="content != null and content != ''">
-		      AND content = #{content}  <!-- content -->
+		      AND content = #{content}  <!-- 评价内容 -->
 		</if>
 	   <if test="userid != null ">
-		      AND userid = #{userid}  <!-- userid -->
+		      AND userid = #{userid}  <!-- 评价用户 -->
 		</if>
 	    <if test="comment_time != null and comment_time != ''">
-		      AND comment_time = #{comment_time}  <!-- comment_time -->
+		      AND comment_time = #{comment_time}  <!-- 评价时间 -->
 		</if>
 	   <if test="score != null ">
 		      AND score = #{score}  <!-- 评价分数,五颗星满分 -->
+		</if>
+	   <if test="status != null ">
+		      AND status = #{status}  <!-- 评论状态：1.正常 2.屏蔽 -->
+		</if>
+	   <if test="enable != null ">
+		      AND enable = #{enable}  <!-- 是否有效(0:删除 1:有效) -->
 		</if>
 	</sql>
 	
@@ -162,14 +191,61 @@
 		      AND product_no like '%${product_no}%'  <!-- 商品编号 -->
 		</if>
 	    <if test="order_no != null and order_no != ''">
-		      AND order_no like '%${order_no}%'  <!-- order_no -->
+		      AND order_no like '%${order_no}%'  <!-- 订单编号 -->
 		</if>
 	    <if test="content != null and content != ''">
-		      AND content like '%${content}%'  <!-- content -->
+		      AND content like '%${content}%'  <!-- 评价内容 -->
 		</if>
 	    <if test="comment_time != null and comment_time != ''">
-		      AND comment_time like '%${comment_time}%'  <!-- comment_time -->
+		      AND comment_time like '%${comment_time}%'  <!-- 评价时间 -->
 		</if>
 	</sql>
 	
+	
+	<resultMap type="com.hipishare.products.domain.response.ProductCommentRsp" id="productCommentResultMap">
+		<id property="id" column="id" />
+		<result property="productNo" column="product_no" />
+		<result property="orderNo" column="order_no" />
+		<result property="content" column="content" />
+		<result property="userid" column="userid" />
+		<result property="commentTime" column="comment_time" />
+		<result property="score" column="score" />
+		<result property="status" column="status" />
+		<result property="enable" column="enable" />
+		<association property="commentImgList" column="id" select="queryProductComment" />
+	</resultMap>
+	
+	<select id="queryProductComment" resultMap="productCommentResultMap">
+		SELECT
+			id,
+			product_no,
+			order_no,
+			content,
+			userid,
+			comment_time,
+			score,
+			`status`,
+			`enable`
+		FROM
+			`ps_product_comment`
+		<where>
+			product_no = #productNo# and status = 1 and enable = 1
+		</where>
+	</select>
+	
+	<select id="queryProductCommentImg" resultType="com.hipishare.products.domain.response.ProductCommentImgRsp">
+		SELECT
+			id,
+			comment_id commentId,
+			img_code imgCode,
+			upload_time uploadTime,
+			sort,
+			`status`,
+			`enable`
+		FROM
+			ps_product_comment_img
+		<where>
+			comment_id = #id# and status = 1 and enable = 1
+		</where>
+	</select>
 </mapper>

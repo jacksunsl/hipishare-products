@@ -1,8 +1,11 @@
 package com.hipishare.products.dao.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.hipishare.products.dao.po.Ps_product_commentPO;
+import com.hipishare.products.domain.response.ProductCommentRsp;
 
 /**
  * <b>ps_product_comment[ps_product_comment]数据访问接口</b>
@@ -12,7 +15,7 @@ import com.hipishare.products.dao.po.Ps_product_commentPO;
  * </p>
  * 
  * @author sunlei
- * @date 2016-10-08 11:54:25
+ * @date 2016-10-11 16:49:29
  */
 public interface Ps_product_commentMapper {
 
@@ -57,5 +60,12 @@ public interface Ps_product_commentMapper {
 	 * @return 影响行数
 	 */
 	int deleteByKey(@Param(value = "id") Integer id);
+	
+	/**
+	 * 根据商品编号查询商品评论
+	 * @param productNo
+	 * @return
+	 */
+	List<ProductCommentRsp> queryProductComment(@Param(value = "productNo") String productNo);
 	
 }

@@ -1,6 +1,7 @@
 package com.hipishare.products.dao.mapper;
 
 import org.apache.ibatis.annotations.Param;
+
 import com.hipishare.products.dao.po.Ps_product_comment_imgPO;
 
 /**
@@ -11,7 +12,7 @@ import com.hipishare.products.dao.po.Ps_product_comment_imgPO;
  * </p>
  * 
  * @author sunlei
- * @date 2016-10-08 11:54:25
+ * @date 2016-10-11 17:03:51
  */
 public interface Ps_product_comment_imgMapper {
 
@@ -49,6 +50,7 @@ public interface Ps_product_comment_imgMapper {
 	 * @return Ps_product_comment_imgPO
 	 */
 	Ps_product_comment_imgPO selectByKey(@Param(value = "id") Integer id);
+
 
 	/**
 	 * 根据主键删除数据持久化对象

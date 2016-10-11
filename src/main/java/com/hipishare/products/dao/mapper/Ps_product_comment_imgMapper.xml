@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- ps_product_comment_img[ps_product_comment_img]SQLMapper自动映射 -->
-<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-08 11:54:25 -->
+<!--  注意:此文件由AOS平台自动生成-禁止手工修改 2016-10-11 17:03:51 -->
 <mapper namespace="com.hipishare.products.dao.mapper.Ps_product_comment_imgMapper">
 	
 	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
@@ -21,6 +21,12 @@
 		<if test="sort != null">
 	         sort, <!-- 图片排序 -->
 		</if>
+		<if test="status != null">
+	         status, <!-- 状态:1.正常 2.屏蔽 -->
+		</if>
+		<if test="enable != null">
+	         enable, <!-- 是否有效(0:删除 1:有效) -->
+		</if>
 	          id
 		)VALUES(
 		<if test="comment_id != null">
@@ -34,6 +40,12 @@
 	    </if>
 		<if test="sort != null">
 	          #{sort, jdbcType=INTEGER}, <!-- 图片排序 -->
+	    </if>
+		<if test="status != null">
+	          #{status, jdbcType=INTEGER}, <!-- 状态:1.正常 2.屏蔽 -->
+	    </if>
+		<if test="enable != null">
+	          #{enable, jdbcType=INTEGER}, <!-- 是否有效(0:删除 1:有效) -->
 	    </if>
 	          null
 		)
@@ -49,7 +61,9 @@
 		    #{comment_id, jdbcType=INTEGER},  <!-- 评价id -->
 		    #{img_code, jdbcType=VARCHAR},  <!-- 评价图片code -->
 		    #{upload_time, jdbcType=VARCHAR},  <!-- 上传时间 -->
-		    #{sort, jdbcType=INTEGER}  <!-- 图片排序 -->
+		    #{sort, jdbcType=INTEGER},  <!-- 图片排序 -->
+		    #{status, jdbcType=INTEGER},  <!-- 状态:1.正常 2.屏蔽 -->
+		    #{enable, jdbcType=INTEGER}  <!-- 是否有效(0:删除 1:有效) -->
 		)
 	</insert>
 
@@ -72,6 +86,12 @@
 			<if test="sort != null">
 		          sort = #{sort, jdbcType=INTEGER},  <!-- 图片排序 -->
 			</if>
+			<if test="status != null">
+		          status = #{status, jdbcType=INTEGER},  <!-- 状态:1.正常 2.屏蔽 -->
+			</if>
+			<if test="enable != null">
+		          enable = #{enable, jdbcType=INTEGER},  <!-- 是否有效(0:删除 1:有效) -->
+			</if>
 		</set>
 		WHERE  id = #{id}
 	</update>
@@ -87,6 +107,7 @@
 		<include refid="column" />
 		FROM ps_product_comment_img WHERE  id = #{id}
 	</select>
+
 	
 	<!-- 表字段 -->
 	<sql id="column">
@@ -94,7 +115,9 @@
 		  comment_id,  <!-- 评价id -->
 		  img_code,  <!-- 评价图片code -->
 		  upload_time,  <!-- 上传时间 -->
-		  sort  <!-- 图片排序 -->
+		  sort,  <!-- 图片排序 -->
+		  status,  <!-- 状态:1.正常 2.屏蔽 -->
+		  enable  <!-- 是否有效(0:删除 1:有效) -->
 	</sql>
 	
 	<!-- 表字段(用于外表的关联时引用) -->
@@ -103,7 +126,9 @@
 		  ps_product_comment_img.comment_id,  <!-- 评价id -->
 		  ps_product_comment_img.img_code,  <!-- 评价图片code -->
 		  ps_product_comment_img.upload_time,  <!-- 上传时间 -->
-		  ps_product_comment_img.sort  <!-- 图片排序 -->
+		  ps_product_comment_img.sort,  <!-- 图片排序 -->
+		  ps_product_comment_img.status,  <!-- 状态:1.正常 2.屏蔽 -->
+		  ps_product_comment_img.enable  <!-- 是否有效(0:删除 1:有效) -->
 	</sql>
 
 	<!-- Where精确匹配字段 -->
@@ -122,6 +147,12 @@
 		</if>
 	   <if test="sort != null ">
 		      AND sort = #{sort}  <!-- 图片排序 -->
+		</if>
+	   <if test="status != null ">
+		      AND status = #{status}  <!-- 状态:1.正常 2.屏蔽 -->
+		</if>
+	   <if test="enable != null ">
+		      AND enable = #{enable}  <!-- 是否有效(0:删除 1:有效) -->
 		</if>
 	</sql>
 	

@@ -6,9 +6,9 @@ import org.restexpress.Response;
 
 import com.hipishare.products.controller.helper.ProductHelper;
 import com.hipishare.products.controller.helper.ProductServerHelper;
-import com.hipishare.products.domain.ProductReq;
-import com.hipishare.products.domain.RequestObject;
-import com.hipishare.products.domain.ResponseObject;
+import com.hipishare.products.domain.request.ProductReq;
+import com.hipishare.products.domain.request.RequestObject;
+import com.hipishare.products.domain.response.ResponseObject;
 import com.hipishare.products.exception.ProductSystemException;
 import com.hipishare.products.service.ProductService;
 import com.hipishare.products.utils.SpringContextUtil;

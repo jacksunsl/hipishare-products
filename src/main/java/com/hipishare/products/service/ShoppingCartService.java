@@ -16,8 +16,8 @@ import com.hipishare.products.dao.mapper.Ps_cart_productMapper;
 import com.hipishare.products.dao.mapper.Ps_shopping_cartMapper;
 import com.hipishare.products.dao.po.Ps_cart_productPO;
 import com.hipishare.products.dao.po.Ps_shopping_cartPO;
-import com.hipishare.products.domain.ShoppingCartReq;
-import com.hipishare.products.domain.ShoppingProductReq;
+import com.hipishare.products.domain.request.ShoppingCartReq;
+import com.hipishare.products.domain.request.ShoppingProductReq;
 import com.hipishare.products.exception.ProductSystemException;
 
 @Service("shoppingCartService")

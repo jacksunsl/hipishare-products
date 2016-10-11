@@ -10,7 +10,7 @@ import org.restexpress.Request;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hipishare.products.domain.RequestObject;
+import com.hipishare.products.domain.request.RequestObject;
 import com.hipishare.products.exception.ProductSystemException;
 import com.hipishare.products.utils.MD5Util;
 import com.hipishare.products.utils.PropertiesUtil;

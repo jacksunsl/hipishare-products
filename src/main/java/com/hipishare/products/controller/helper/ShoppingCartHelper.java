@@ -4,7 +4,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
 
-import com.hipishare.products.domain.ShoppingCartReq;
+import com.hipishare.products.domain.request.ShoppingCartReq;
 import com.hipishare.products.exception.ProductSystemException;
 
 public class ShoppingCartHelper {

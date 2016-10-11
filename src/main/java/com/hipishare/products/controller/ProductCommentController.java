@@ -14,13 +14,13 @@ import com.hipishare.products.service.ShoppingCartService;
 import com.hipishare.products.utils.SpringContextUtil;
 
 /**
- * 购物车
+ * 商品评价控制器
  * @author sunlei
- * @date 2016年9月26日
+ * @date 2016年10月11日
  */
-public class ShoppingCartController extends ProductServerHelper {
+public class ProductCommentController extends ProductServerHelper {
 
-	private static final Logger LOGGER = Logger.getLogger(ShoppingCartController.class);
+	private static final Logger LOGGER = Logger.getLogger(ProductCommentController.class);
 
 	private static ShoppingCartService shoppingCartService = null;
 

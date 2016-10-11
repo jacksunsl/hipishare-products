@@ -9,7 +9,7 @@ import java.util.Date;
  * </p>
  * 
  * @author sunlei
- * @date 2016-10-08 11:54:25
+ * @date 2016-10-11 16:49:29
  */
 public class Ps_product_commentPO {
 
@@ -24,22 +24,22 @@ public class Ps_product_commentPO {
 	private String product_no;
 	
 	/**
-	 * order_no
+	 * 订单编号
 	 */
 	private String order_no;
 	
 	/**
-	 * content
+	 * 评价内容
 	 */
 	private String content;
 	
 	/**
-	 * userid
+	 * 评价用户
 	 */
 	private Integer userid;
 	
 	/**
-	 * comment_time
+	 * 评价时间
 	 */
 	private Date comment_time;
 	
@@ -47,6 +47,16 @@ public class Ps_product_commentPO {
 	 * 评价分数,五颗星满分
 	 */
 	private Integer score;
+	
+	/**
+	 * 评论状态：1.正常 2.屏蔽
+	 */
+	private Integer status;
+	
+	/**
+	 * 是否有效(0:删除 1:有效)
+	 */
+	private Integer enable;
 	
 
 	/**
@@ -68,7 +78,7 @@ public class Ps_product_commentPO {
 	}
 	
 	/**
-	 * order_no
+	 * 订单编号
 	 * 
 	 * @return order_no
 	 */
@@ -77,7 +87,7 @@ public class Ps_product_commentPO {
 	}
 	
 	/**
-	 * content
+	 * 评价内容
 	 * 
 	 * @return content
 	 */
@@ -86,7 +96,7 @@ public class Ps_product_commentPO {
 	}
 	
 	/**
-	 * userid
+	 * 评价用户
 	 * 
 	 * @return userid
 	 */
@@ -95,7 +105,7 @@ public class Ps_product_commentPO {
 	}
 	
 	/**
-	 * comment_time
+	 * 评价时间
 	 * 
 	 * @return comment_time
 	 */
@@ -110,6 +120,24 @@ public class Ps_product_commentPO {
 	 */
 	public Integer getScore() {
 		return score;
+	}
+	
+	/**
+	 * 评论状态：1.正常 2.屏蔽
+	 * 
+	 * @return status
+	 */
+	public Integer getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 是否有效(0:删除 1:有效)
+	 * 
+	 * @return enable
+	 */
+	public Integer getEnable() {
+		return enable;
 	}
 	
 
@@ -132,7 +160,7 @@ public class Ps_product_commentPO {
 	}
 	
 	/**
-	 * order_no
+	 * 订单编号
 	 * 
 	 * @param order_no
 	 */
@@ -141,7 +169,7 @@ public class Ps_product_commentPO {
 	}
 	
 	/**
-	 * content
+	 * 评价内容
 	 * 
 	 * @param content
 	 */
@@ -150,7 +178,7 @@ public class Ps_product_commentPO {
 	}
 	
 	/**
-	 * userid
+	 * 评价用户
 	 * 
 	 * @param userid
 	 */
@@ -159,7 +187,7 @@ public class Ps_product_commentPO {
 	}
 	
 	/**
-	 * comment_time
+	 * 评价时间
 	 * 
 	 * @param comment_time
 	 */
@@ -174,6 +202,24 @@ public class Ps_product_commentPO {
 	 */
 	public void setScore(Integer score) {
 		this.score = score;
+	}
+	
+	/**
+	 * 评论状态：1.正常 2.屏蔽
+	 * 
+	 * @param status
+	 */
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	/**
+	 * 是否有效(0:删除 1:有效)
+	 * 
+	 * @param enable
+	 */
+	public void setEnable(Integer enable) {
+		this.enable = enable;
 	}
 	
 

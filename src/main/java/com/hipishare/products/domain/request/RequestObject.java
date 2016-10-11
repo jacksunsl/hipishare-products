@@ -1,4 +1,4 @@
-package com.hipishare.products.domain;
+package com.hipishare.products.domain.request;
 
 public class RequestObject {
 

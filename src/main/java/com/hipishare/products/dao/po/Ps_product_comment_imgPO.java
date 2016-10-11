@@ -9,7 +9,7 @@ import java.util.Date;
  * </p>
  * 
  * @author sunlei
- * @date 2016-10-08 11:54:25
+ * @date 2016-10-11 17:03:51
  */
 public class Ps_product_comment_imgPO {
 
@@ -37,6 +37,16 @@ public class Ps_product_comment_imgPO {
 	 * 图片排序
 	 */
 	private Integer sort;
+	
+	/**
+	 * 状态:1.正常 2.屏蔽
+	 */
+	private Integer status;
+	
+	/**
+	 * 是否有效(0:删除 1:有效)
+	 */
+	private Integer enable;
 	
 
 	/**
@@ -84,6 +94,24 @@ public class Ps_product_comment_imgPO {
 		return sort;
 	}
 	
+	/**
+	 * 状态:1.正常 2.屏蔽
+	 * 
+	 * @return status
+	 */
+	public Integer getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 是否有效(0:删除 1:有效)
+	 * 
+	 * @return enable
+	 */
+	public Integer getEnable() {
+		return enable;
+	}
+	
 
 	/**
 	 * id
@@ -128,6 +156,24 @@ public class Ps_product_comment_imgPO {
 	 */
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+	
+	/**
+	 * 状态:1.正常 2.屏蔽
+	 * 
+	 * @param status
+	 */
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	/**
+	 * 是否有效(0:删除 1:有效)
+	 * 
+	 * @param enable
+	 */
+	public void setEnable(Integer enable) {
+		this.enable = enable;
 	}
 	
 
