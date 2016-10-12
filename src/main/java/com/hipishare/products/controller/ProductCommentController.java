@@ -37,7 +37,7 @@ public class ProductCommentController extends ProductServerHelper {
 	}
 	
 	/**
-	 * 把商品放入购物车
+	 * 查询商品评价
 	 * @param request
 	 * @param response
 	 * @return
@@ -76,4 +76,42 @@ public class ProductCommentController extends ProductServerHelper {
 		return responseObject;
 	}
 	
+	/**
+	 * 写商品评价
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public Object writeProductComment(Request request, Response response) {
+		LOGGER.info("[ProductCommentController.writeProductComment][begin]");
+		ResponseObject responseObject = new ResponseObject();
+		try {
+			// 业务预处理
+			RequestObject requestObject = preDobusiness(request);
+			
+			// 解析业务请求数据
+			LOGGER.info("[ProductCommentController.writeProductComment][data]"+requestObject.getData());
+			ProductCommentReq productCommentReq = gson.fromJson(requestObject.getData(), ProductCommentReq.class);
+			
+			// 验证请求参数
+			ProductCommentHelper.validWriteProductComment(productCommentReq);
+			
+			// 业务处理
+			productCommentService.writeProductComment(productCommentReq);
+			
+			responseObject.setCode("00");
+			responseObject.setMsg("评论成功！");
+		} catch(ProductSystemException e) {
+			responseObject.setCode(e.getCode());
+			responseObject.setMsg(e.getMessage());
+			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+		} catch(Exception e) {
+			responseObject.setCode("99");
+			responseObject.setMsg("评论失败，请稍后再试。");
+			e.printStackTrace();
+			LOGGER.error("商品服务系统异常，请稍后再试。");
+		}
+		return responseObject;
+	}
 }

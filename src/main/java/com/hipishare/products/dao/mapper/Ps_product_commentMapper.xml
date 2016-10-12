@@ -229,8 +229,9 @@
 		FROM
 			ps_product_comment
 		<where>
-			product_no = #{productNo} and status = 1 and enable = 1
+			product_no = #{productNo} and status = 1 and enable = 1 
 		</where>
+			order by comment_time desc
 	</select>
 	
 	<select id="queryProductCommentImg" resultType="com.hipishare.products.domain.response.ProductCommentImgRsp">
@@ -240,12 +241,13 @@
 			img_code imgCode,
 			upload_time uploadTime,
 			sort,
-			`status`,
-			`enable`
+			status,
+			enable
 		FROM
 			ps_product_comment_img
 		<where>
 			comment_id = #{id} and status = 1 and enable = 1
 		</where>
+			order by sort asc
 	</select>
 </mapper>
