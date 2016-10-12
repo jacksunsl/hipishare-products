@@ -212,7 +212,7 @@
 		<result property="score" column="score" />
 		<result property="status" column="status" />
 		<result property="enable" column="enable" />
-		<association property="commentImgList" column="id" select="queryProductComment" />
+		<association property="commentImgList" column="id" select="queryProductCommentImg" />
 	</resultMap>
 	
 	<select id="queryProductComment" resultMap="productCommentResultMap">
@@ -224,12 +224,12 @@
 			userid,
 			comment_time,
 			score,
-			`status`,
-			`enable`
+			status,
+			enable
 		FROM
-			`ps_product_comment`
+			ps_product_comment
 		<where>
-			product_no = #productNo# and status = 1 and enable = 1
+			product_no = #{productNo} and status = 1 and enable = 1
 		</where>
 	</select>
 	
@@ -245,7 +245,7 @@
 		FROM
 			ps_product_comment_img
 		<where>
-			comment_id = #id# and status = 1 and enable = 1
+			comment_id = #{id} and status = 1 and enable = 1
 		</where>
 	</select>
 </mapper>

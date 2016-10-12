@@ -130,7 +130,7 @@ public class ProductServerHelper {
 		RequestObject requestObject = getRequestObject();
 
 		// 验证签名
-		validSign(requestObject);
+//		validSign(requestObject);
 		LOGGER.info("[ProductServerHelper.preDobusiness][end]");
 		return requestObject;
 	}

@@ -9,6 +9,7 @@ import java.util.List;
  * @date 2016年10月11日
  */
 public class ProductCommentRsp {
+	private int id;
 	private String productNo;// 商品编号
 	private String orderNo;// 订单编号
 	private String content;// 评价内容
@@ -18,6 +19,12 @@ public class ProductCommentRsp {
 	private int status;// 评论状态：1.正常 2.屏蔽
 	private int enable;// 是否有效(0:删除 1:有效)
 	private List<ProductCommentImgRsp> commentImgList;// 评论图片数组
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getProductNo() {
 		return productNo;
 	}

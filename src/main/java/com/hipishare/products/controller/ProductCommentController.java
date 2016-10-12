@@ -1,16 +1,19 @@
 package com.hipishare.products.controller;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.restexpress.Request;
 import org.restexpress.Response;
 
+import com.hipishare.products.controller.helper.ProductCommentHelper;
 import com.hipishare.products.controller.helper.ProductServerHelper;
-import com.hipishare.products.controller.helper.ShoppingCartHelper;
+import com.hipishare.products.domain.request.ProductCommentReq;
 import com.hipishare.products.domain.request.RequestObject;
-import com.hipishare.products.domain.request.ShoppingCartReq;
+import com.hipishare.products.domain.response.ProductCommentRsp;
 import com.hipishare.products.domain.response.ResponseObject;
 import com.hipishare.products.exception.ProductSystemException;
-import com.hipishare.products.service.ShoppingCartService;
+import com.hipishare.products.service.ProductCommentService;
 import com.hipishare.products.utils.SpringContextUtil;
 
 /**
@@ -22,13 +25,13 @@ public class ProductCommentController extends ProductServerHelper {
 
 	private static final Logger LOGGER = Logger.getLogger(ProductCommentController.class);
 
-	private static ShoppingCartService shoppingCartService = null;
+	private static ProductCommentService productCommentService = null;
 
 	static{
 		try {
-			shoppingCartService = (ShoppingCartService)SpringContextUtil.getBean("shoppingCartService");
+			productCommentService = (ProductCommentService)SpringContextUtil.getBean("productCommentService");
 		} catch (Exception e) {
-			LOGGER.error("[ShoppingCartController] 注入service失败");
+			LOGGER.error("[ProductCommentController] 注入service失败");
 			e.printStackTrace();
 		}
 	}
@@ -39,25 +42,26 @@ public class ProductCommentController extends ProductServerHelper {
 	 * @param response
 	 * @return
 	 */
-	public Object putProductToCart(Request request, Response response) {
-		LOGGER.info("[ShoppingCartController.putProductToCart][begin]");
+	public Object queryProductComment(Request request, Response response) {
+		LOGGER.info("[ProductCommentController.queryProductComment][begin]");
 		ResponseObject responseObject = new ResponseObject();
 		try {
 			// 业务预处理
 			RequestObject requestObject = preDobusiness(request);
 			
 			// 解析业务请求数据
-			LOGGER.info("[ShoppingCartController.putProductToCart][data]"+requestObject.getData());
-			ShoppingCartReq shoppingCartReq = gson.fromJson(requestObject.getData(), ShoppingCartReq.class);
+			LOGGER.info("[ProductCommentController.queryProductComment][data]"+requestObject.getData());
+			ProductCommentReq productCommentReq = gson.fromJson(requestObject.getData(), ProductCommentReq.class);
 			
 			// 验证请求参数
-			ShoppingCartHelper.validPutProduct(shoppingCartReq);
+			ProductCommentHelper.validQueryProductComment(productCommentReq);
 			
 			// 业务处理
-			shoppingCartService.putProductToCart(shoppingCartReq);
+			List<ProductCommentRsp> productCommentList = productCommentService.queryProductComment(productCommentReq.getProductNo());
 			
 			responseObject.setCode("00");
-			responseObject.setMsg("已加入购物车！");
+			responseObject.setMsg("查询成功！");
+			responseObject.setResult(gson.toJson(productCommentList));
 		} catch(ProductSystemException e) {
 			responseObject.setCode(e.getCode());
 			responseObject.setMsg(e.getMessage());
@@ -65,166 +69,11 @@ public class ProductCommentController extends ProductServerHelper {
 			LOGGER.error(e.getMessage());
 		} catch(Exception e) {
 			responseObject.setCode("99");
-			responseObject.setMsg("加入购物车失败，请稍后再试。");
+			responseObject.setMsg("查询失败，请稍后再试。");
 			e.printStackTrace();
 			LOGGER.error("商品服务系统异常，请稍后再试。");
 		}
 		return responseObject;
 	}
 	
-	/**
-	 * 清空购物车
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	public Object emptyCart(Request request, Response response) {
-		LOGGER.info("[ShoppingCartController.emptyCart][begin]");
-		ResponseObject responseObject = new ResponseObject();
-		try {
-			// 业务预处理
-			RequestObject requestObject = preDobusiness(request);
-			
-			// 解析业务请求数据
-			LOGGER.info("[ShoppingCartController.emptyCart][data]"+requestObject.getData());
-			ShoppingCartReq shoppingCartReq = gson.fromJson(requestObject.getData(), ShoppingCartReq.class);
-			
-			// 验证请求参数
-			ShoppingCartHelper.validEmptyCart(shoppingCartReq);
-			
-			// 业务处理
-			shoppingCartService.emptyCart(shoppingCartReq);
-			
-			responseObject.setCode("00");
-			responseObject.setMsg("购物车已经清空！");
-		} catch(ProductSystemException e) {
-			responseObject.setCode(e.getCode());
-			responseObject.setMsg(e.getMessage());
-			e.printStackTrace();
-			LOGGER.error(e.getMessage());
-		} catch(Exception e) {
-			responseObject.setCode("99");
-			responseObject.setMsg("清空购物车失败，请稍后再试。");
-			e.printStackTrace();
-			LOGGER.error("商品服务系统异常，请稍后再试。");
-		}
-		return responseObject;
-	}
-	
-	/**
-	 * 删除购物车商品
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	public Object removeProduct(Request request, Response response) {
-		LOGGER.info("[ShoppingCartController.removeProduct][begin]");
-		ResponseObject responseObject = new ResponseObject();
-		try {
-			// 业务预处理
-			RequestObject requestObject = preDobusiness(request);
-			
-			// 解析业务请求数据
-			LOGGER.info("[ShoppingCartController.removeProduct][data]"+requestObject.getData());
-			ShoppingCartReq shoppingCartReq = gson.fromJson(requestObject.getData(), ShoppingCartReq.class);
-			
-			// 验证请求参数
-			ShoppingCartHelper.validRemoveProduct(shoppingCartReq);
-			
-			// 业务处理
-			shoppingCartService.removeFromCart(shoppingCartReq);
-			
-			responseObject.setCode("00");
-			responseObject.setMsg("商品已经移出购物车！");
-		} catch(ProductSystemException e) {
-			responseObject.setCode(e.getCode());
-			responseObject.setMsg(e.getMessage());
-			e.printStackTrace();
-			LOGGER.error(e.getMessage());
-		} catch(Exception e) {
-			responseObject.setCode("99");
-			responseObject.setMsg("商品移出购物车失败，请稍后再试。");
-			e.printStackTrace();
-			LOGGER.error("商品服务系统异常，请稍后再试。");
-		}
-		return responseObject;
-	}
-	
-	/**
-	 * 减少购物车商品数量
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	public Object subProductNum(Request request, Response response) {
-		LOGGER.info("[ShoppingCartController.subProductNum][begin]");
-		ResponseObject responseObject = new ResponseObject();
-		try {
-			// 业务预处理
-			RequestObject requestObject = preDobusiness(request);
-			
-			// 解析业务请求数据
-			LOGGER.info("[ShoppingCartController.subProductNum][data]"+requestObject.getData());
-			ShoppingCartReq shoppingCartReq = gson.fromJson(requestObject.getData(), ShoppingCartReq.class);
-			
-			// 验证请求参数
-			ShoppingCartHelper.validSubProductNum(shoppingCartReq);
-			
-			// 业务处理
-			shoppingCartService.subProductNum(shoppingCartReq);
-			
-			responseObject.setCode("00");
-			responseObject.setMsg("商品数量修改成功！");
-		} catch(ProductSystemException e) {
-			responseObject.setCode(e.getCode());
-			responseObject.setMsg(e.getMessage());
-			e.printStackTrace();
-			LOGGER.error(e.getMessage());
-		} catch(Exception e) {
-			responseObject.setCode("99");
-			responseObject.setMsg("商品数量修改失败，请稍后再试。");
-			e.printStackTrace();
-			LOGGER.error("商品服务系统异常，请稍后再试。");
-		}
-		return responseObject;
-	}
-	
-	/**
-	 * 增加购物车商品数量
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	public Object plusProductNum(Request request, Response response) {
-		LOGGER.info("[ShoppingCartController.plusProductNum][begin]");
-		ResponseObject responseObject = new ResponseObject();
-		try {
-			// 业务预处理
-			RequestObject requestObject = preDobusiness(request);
-			
-			// 解析业务请求数据
-			LOGGER.info("[ShoppingCartController.plusProductNum][data]"+requestObject.getData());
-			ShoppingCartReq shoppingCartReq = gson.fromJson(requestObject.getData(), ShoppingCartReq.class);
-			
-			// 验证请求参数
-			ShoppingCartHelper.validPlusProductNum(shoppingCartReq);
-			
-			// 业务处理
-			shoppingCartService.plusProductNum(shoppingCartReq);
-			
-			responseObject.setCode("00");
-			responseObject.setMsg("商品数量修改成功！");
-		} catch(ProductSystemException e) {
-			responseObject.setCode(e.getCode());
-			responseObject.setMsg(e.getMessage());
-			e.printStackTrace();
-			LOGGER.error(e.getMessage());
-		} catch(Exception e) {
-			responseObject.setCode("99");
-			responseObject.setMsg("商品数量修改失败，请稍后再试。");
-			e.printStackTrace();
-			LOGGER.error("商品服务系统异常，请稍后再试。");
-		}
-		return responseObject;
-	}
 }
