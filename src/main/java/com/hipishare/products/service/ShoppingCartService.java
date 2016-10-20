@@ -1,7 +1,6 @@
 package com.hipishare.products.service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +18,8 @@ import com.hipishare.products.dao.po.Ps_shopping_cartPO;
 import com.hipishare.products.domain.request.ShoppingCartReq;
 import com.hipishare.products.domain.request.ShoppingProductReq;
 import com.hipishare.products.exception.ProductSystemException;
+import com.hipishare.products.utils.DateUtil;
+import com.hipishare.products.utils.RandomCode;
 
 @Service("shoppingCartService")
 public class ShoppingCartService {
@@ -43,9 +44,10 @@ public class ShoppingCartService {
 		// 根据用户id查询购物车
 		Ps_shopping_cartPO shoppingCart = shoppingCartMapper.findByUserid(Integer.parseInt(shoppingCartReq.getUserid()));
 		
-		// 获取购物车编号
-		String cartNo = "cartno8901387842";
+		String cartNo = "";
 		if (null == shoppingCart) {
+			// 获取购物车编号
+			cartNo = DateUtil.getDate() + RandomCode.getCharAndNumr(6, true);
 			// 新增购物车
 			shoppingCart = new Ps_shopping_cartPO();
 			shoppingCart.setCart_no(cartNo);
@@ -53,10 +55,12 @@ public class ShoppingCartService {
 			shoppingCart.setPiece_num(0);
 			shoppingCart.setUserid(Integer.parseInt(shoppingCartReq.getUserid()));
 			shoppingCartMapper.insert(shoppingCart);
+		} else {
+			cartNo = shoppingCart.getCart_no();
 		}
 		
 		// 购物车商品
-		List<Ps_cart_productPO> cartProductList = new ArrayList<Ps_cart_productPO>();
+//		List<Ps_cart_productPO> cartProductList = new ArrayList<Ps_cart_productPO>();
 		if (!StringUtils.isEmpty(shoppingCartReq.getProductList())) {
 			List<ShoppingProductReq> productReqList = shoppingCartReq.getProductList();
 			for (int i=0;i < productReqList.size();i++) {
@@ -73,7 +77,7 @@ public class ShoppingCartService {
 					product.setPush_price(new BigDecimal(productReqList.get(i).getMarkPrice()));
 					product.setPush_time(new Date());
 					product.setCart_no(cartNo);
-					cartProductList.add(product);
+					cartProductMapper.insert(product);
 				}
 			}
 		}

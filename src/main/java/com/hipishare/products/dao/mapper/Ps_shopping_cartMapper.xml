@@ -15,7 +15,7 @@
 		<if test="userid != null">
 	         userid, <!-- 用户id -->
 		</if>
-		<if test="create_time != null and create_time != ''">
+		<if test="create_time != null">
 	         create_time, <!-- 购物车创建时间 -->
 		</if>
 		<if test="piece_num != null">
@@ -29,7 +29,7 @@
 		<if test="userid != null">
 	          #{userid, jdbcType=INTEGER}, <!-- 用户id -->
 	    </if>
-		<if test="create_time != null and create_time != ''">
+		<if test="create_time != null">
 	          #{create_time, jdbcType=VARCHAR}, <!-- 购物车创建时间 -->
 	    </if>
 		<if test="piece_num != null">
@@ -130,13 +130,13 @@
 	    <if test="cart_no != null and cart_no != ''">
 		      AND cart_no like '%${cart_no}%'  <!-- 购物车编号 -->
 		</if>
-	    <if test="create_time != null and create_time != ''">
+	    <if test="create_time != null">
 		      AND create_time like '%${create_time}%'  <!-- 购物车创建时间 -->
 		</if>
 	</sql>
 	
 	<select id="findByUserid" parameterType="java.lang.Integer" resultType="Ps_shopping_cartPO">
-		select id, userid, create_time, piece_num from ps_shopping_cart WHERE userid = #userid#
+		select id, userid, create_time, piece_num from ps_shopping_cart WHERE userid = #{userid}
 	</select>
 	
 </mapper>
