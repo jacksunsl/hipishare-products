@@ -9,9 +9,6 @@
 	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
 	<insert id="insert"  parameterType="Ps_cart_productPO">
 		INSERT INTO ps_cart_product (
-		<if test="product_no != null and product_no != ''">
-	         product_no, <!-- 商品编号 -->
-		</if>
 		<if test="num != null">
 	         num, <!-- 商品数量 -->
 		</if>
@@ -22,12 +19,12 @@
 	         push_price, <!-- 放入时商品价格 -->
 		</if>
 		<if test="cart_no != null and cart_no != ''">
-	         cart_no <!-- 购物车编号 -->
+	         cart_no, <!-- 购物车编号 -->
+		</if>
+		<if test="product_no != null and product_no != ''">
+	         product_no <!-- 商品编号 -->
 		</if>
 		)VALUES(
-		<if test="product_no != null and product_no != ''">
-	          #{product_no, jdbcType=VARCHAR}, <!-- 商品编号 -->
-	    </if>
 		<if test="num != null">
 	          #{num, jdbcType=INTEGER}, <!-- 商品数量 -->
 	    </if>
@@ -38,7 +35,10 @@
 	          #{push_price, jdbcType=NUMERIC}, <!-- 放入时商品价格 -->
 	    </if>
 		<if test="cart_no != null and cart_no != ''">
-	          #{cart_no, jdbcType=VARCHAR} <!-- 购物车编号 -->
+	          #{cart_no, jdbcType=VARCHAR}, <!-- 购物车编号 -->
+	    </if>
+		<if test="product_no != null and product_no != ''">
+	          #{product_no, jdbcType=VARCHAR} <!-- 商品编号 -->
 	    </if>
 		)
 	</insert>
